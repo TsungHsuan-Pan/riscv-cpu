@@ -1,0 +1,3457 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2019  Clifford Wolf <clifford@clifford.at>           |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9 (git sha1 UNKNOWN, clang 10.0.0-4ubuntu1 -fPIC -Os)
+
+
+-- Executing script file `cpu.ys' --
+
+1. Executing Verilog-2005 frontend: ./codes/cpu.v
+Parsing Verilog input from `./codes/cpu.v' to AST representation.
+Generating RTLIL representation for module `\cpu'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: ./codes/IF.v
+Parsing Verilog input from `./codes/IF.v' to AST representation.
+Generating RTLIL representation for module `\IF'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: ./codes/ID.v
+Parsing Verilog input from `./codes/ID.v' to AST representation.
+Generating RTLIL representation for module `\ID'.
+Warning: Replacing memory \registers_r with list of registers. See ./codes/ID.v:200
+Warning: Replacing memory \registers_w with list of registers. See ./codes/ID.v:182
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: ./codes/EX.v
+Parsing Verilog input from `./codes/EX.v' to AST representation.
+Generating RTLIL representation for module `\EX'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: ./codes/MEM.v
+Parsing Verilog input from `./codes/MEM.v' to AST representation.
+Generating RTLIL representation for module `\MEM'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: ./codes/WB.v
+Parsing Verilog input from `./codes/WB.v' to AST representation.
+Generating RTLIL representation for module `\WB'.
+Successfully finished Verilog frontend.
+
+7. Executing SYNTH pass.
+
+7.1. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1.1. Analyzing design hierarchy..
+Top module:  \cpu
+Used module:     \WB
+Used module:     \MEM
+Used module:     \EX
+Used module:     \ID
+Used module:     \IF
+
+7.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\WB'.
+Parameter \ADDR_W = 64
+Parameter \INST_W = 32
+Parameter \DATA_W = 64
+Generating RTLIL representation for module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.1.3. Executing AST frontend in derive mode using pre-parsed AST for module `\MEM'.
+Parameter \ADDR_W = 64
+Parameter \INST_W = 32
+Parameter \DATA_W = 64
+Generating RTLIL representation for module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.1.4. Executing AST frontend in derive mode using pre-parsed AST for module `\EX'.
+Parameter \ADDR_W = 64
+Parameter \INST_W = 32
+Parameter \DATA_W = 64
+Generating RTLIL representation for module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.1.5. Executing AST frontend in derive mode using pre-parsed AST for module `\ID'.
+Parameter \ADDR_W = 64
+Parameter \INST_W = 32
+Parameter \DATA_W = 64
+Generating RTLIL representation for module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Warning: Replacing memory \registers_r with list of registers. See ./codes/ID.v:200
+Warning: Replacing memory \registers_w with list of registers. See ./codes/ID.v:182
+
+7.1.6. Executing AST frontend in derive mode using pre-parsed AST for module `\IF'.
+Parameter \ADDR_W = 64
+Parameter \INST_W = 32
+Parameter \DATA_W = 64
+Generating RTLIL representation for module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.1.7. Analyzing design hierarchy..
+Top module:  \cpu
+Used module:     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64
+
+7.1.8. Analyzing design hierarchy..
+Top module:  \cpu
+Used module:     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64
+Removing unused module `\WB'.
+Removing unused module `\MEM'.
+Removing unused module `\EX'.
+Removing unused module `\ID'.
+Removing unused module `\IF'.
+Removed 5 unused modules.
+
+7.2. Executing PROC pass (convert processes to netlists).
+
+7.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$./codes/IF.v:89$517 in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 4 switch rules as full_case in process $proc$./codes/IF.v:59$512 in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/IF.v:30$510 in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/ID.v:189$508 in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 32 switch rules as full_case in process $proc$./codes/ID.v:179$443 in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Removed 2 dead cases from process $proc$./codes/ID.v:68$431 in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 6 switch rules as full_case in process $proc$./codes/ID.v:68$431 in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/EX.v:402$331 in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/EX.v:385$329 in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 15 switch rules as full_case in process $proc$./codes/EX.v:67$276 in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/MEM.v:105$274 in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/MEM.v:95$272 in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 4 switch rules as full_case in process $proc$./codes/MEM.v:47$266 in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 1 switch rules as full_case in process $proc$./codes/WB.v:51$264 in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Marked 3 switch rules as full_case in process $proc$./codes/WB.v:28$260 in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Removed a total of 2 dead cases.
+
+7.2.3. Executing PROC_INIT pass (extract init attributes).
+
+7.2.4. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \i_rst_n in `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+Found async reset \i_rst_n in `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+Found async reset \i_rst_n in `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+Found async reset \i_rst_n in `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+Found async reset \i_rst_n in `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+
+7.2.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+     1/6: $0\cs[4:0]
+     2/6: $0\pc_r[63:0]
+     3/6: $0\o_valid_r[0:0]
+     4/6: $0\o_pc_r[63:0]
+     5/6: $0\o_i_addr_r[63:0]
+     6/6: $0\o_i_valid_addr_r[0:0]
+Creating decoders for process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+     1/17: $3\pc_w[63:0]
+     2/17: $3\o_i_addr_w[63:0]
+     3/17: $3\o_i_valid_addr_w[0:0]
+     4/17: $2\pc_w[63:0] [63:9]
+     5/17: $2\pc_w[63:0] [8:0]
+     6/17: $2\o_i_addr_w[63:0]
+     7/17: $2\o_i_valid_addr_w[0:0]
+     8/17: $1\pc_w[63:0]
+     9/17: $1\o_i_addr_w[63:0]
+    10/17: $1\o_i_valid_addr_w[0:0]
+    11/17: $1\o_pc_w[63:0]
+    12/17: $1\o_valid_w[0:0]
+    13/17: $0\pc_w[63:0]
+    14/17: $0\o_i_addr_w[63:0]
+    15/17: $0\o_i_valid_addr_w[0:0]
+    16/17: $0\o_valid_w[0:0]
+    17/17: $0\o_pc_w[63:0]
+Creating decoders for process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:30$510'.
+     1/2: $1\ns[4:0]
+     2/2: $0\ns[4:0]
+Creating decoders for process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+     1/41: $2\i[31:0]
+     2/41: $1\i[31:0]
+     3/41: $0\registers_r[31][63:0]
+     4/41: $0\registers_r[30][63:0]
+     5/41: $0\registers_r[29][63:0]
+     6/41: $0\registers_r[28][63:0]
+     7/41: $0\registers_r[27][63:0]
+     8/41: $0\registers_r[26][63:0]
+     9/41: $0\registers_r[25][63:0]
+    10/41: $0\registers_r[24][63:0]
+    11/41: $0\registers_r[23][63:0]
+    12/41: $0\registers_r[22][63:0]
+    13/41: $0\registers_r[21][63:0]
+    14/41: $0\registers_r[20][63:0]
+    15/41: $0\registers_r[19][63:0]
+    16/41: $0\registers_r[18][63:0]
+    17/41: $0\registers_r[17][63:0]
+    18/41: $0\registers_r[16][63:0]
+    19/41: $0\registers_r[15][63:0]
+    20/41: $0\registers_r[14][63:0]
+    21/41: $0\registers_r[13][63:0]
+    22/41: $0\registers_r[12][63:0]
+    23/41: $0\registers_r[11][63:0]
+    24/41: $0\registers_r[10][63:0]
+    25/41: $0\registers_r[9][63:0]
+    26/41: $0\registers_r[8][63:0]
+    27/41: $0\registers_r[7][63:0]
+    28/41: $0\registers_r[6][63:0]
+    29/41: $0\registers_r[5][63:0]
+    30/41: $0\registers_r[4][63:0]
+    31/41: $0\registers_r[3][63:0]
+    32/41: $0\registers_r[2][63:0]
+    33/41: $0\registers_r[1][63:0]
+    34/41: $0\registers_r[0][63:0]
+    35/41: $0\o_op_r[3:0]
+    36/41: $0\o_finish_r[0:0]
+    37/41: $0\o_rd_id_r[4:0]
+    38/41: $0\o_rs2_r[63:0]
+    39/41: $0\o_imm_r[63:0]
+    40/41: $0\o_rs1_r[63:0]
+    41/41: $0\o_valid_r[0:0]
+Creating decoders for process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+     1/65: $1\registers_w[31][63:0]
+     2/65: $1\registers_w[30][63:0]
+     3/65: $1\registers_w[29][63:0]
+     4/65: $1\registers_w[28][63:0]
+     5/65: $1\registers_w[27][63:0]
+     6/65: $1\registers_w[26][63:0]
+     7/65: $1\registers_w[25][63:0]
+     8/65: $1\registers_w[24][63:0]
+     9/65: $1\registers_w[23][63:0]
+    10/65: $1\registers_w[22][63:0]
+    11/65: $1\registers_w[21][63:0]
+    12/65: $1\registers_w[20][63:0]
+    13/65: $1\registers_w[19][63:0]
+    14/65: $1\registers_w[18][63:0]
+    15/65: $1\registers_w[17][63:0]
+    16/65: $1\registers_w[16][63:0]
+    17/65: $1\registers_w[15][63:0]
+    18/65: $1\registers_w[14][63:0]
+    19/65: $1\registers_w[13][63:0]
+    20/65: $1\registers_w[12][63:0]
+    21/65: $1\registers_w[11][63:0]
+    22/65: $1\registers_w[10][63:0]
+    23/65: $1\registers_w[9][63:0]
+    24/65: $1\registers_w[8][63:0]
+    25/65: $1\registers_w[7][63:0]
+    26/65: $1\registers_w[6][63:0]
+    27/65: $1\registers_w[5][63:0]
+    28/65: $1\registers_w[4][63:0]
+    29/65: $1\registers_w[3][63:0]
+    30/65: $1\registers_w[2][63:0]
+    31/65: $1\registers_w[1][63:0]
+    32/65: $1\registers_w[0][63:0]
+    33/65: $0\i[31:0]
+    34/65: $0\registers_w[31][63:0]
+    35/65: $0\registers_w[30][63:0]
+    36/65: $0\registers_w[29][63:0]
+    37/65: $0\registers_w[28][63:0]
+    38/65: $0\registers_w[27][63:0]
+    39/65: $0\registers_w[26][63:0]
+    40/65: $0\registers_w[25][63:0]
+    41/65: $0\registers_w[24][63:0]
+    42/65: $0\registers_w[23][63:0]
+    43/65: $0\registers_w[22][63:0]
+    44/65: $0\registers_w[21][63:0]
+    45/65: $0\registers_w[20][63:0]
+    46/65: $0\registers_w[19][63:0]
+    47/65: $0\registers_w[18][63:0]
+    48/65: $0\registers_w[17][63:0]
+    49/65: $0\registers_w[16][63:0]
+    50/65: $0\registers_w[15][63:0]
+    51/65: $0\registers_w[14][63:0]
+    52/65: $0\registers_w[13][63:0]
+    53/65: $0\registers_w[12][63:0]
+    54/65: $0\registers_w[11][63:0]
+    55/65: $0\registers_w[10][63:0]
+    56/65: $0\registers_w[9][63:0]
+    57/65: $0\registers_w[8][63:0]
+    58/65: $0\registers_w[7][63:0]
+    59/65: $0\registers_w[6][63:0]
+    60/65: $0\registers_w[5][63:0]
+    61/65: $0\registers_w[4][63:0]
+    62/65: $0\registers_w[3][63:0]
+    63/65: $0\registers_w[2][63:0]
+    64/65: $0\registers_w[1][63:0]
+    65/65: $0\registers_w[0][63:0]
+Creating decoders for process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+     1/43: $1\rd[4:0]
+     2/43: $1\op[6:0]
+     3/43: $1\funct3[2:0]
+     4/43: $1\rs1[4:0]
+     5/43: $1\left_12[11:0]
+     6/43: $2\o_finish_w[0:0]
+     7/43: $3\o_op_w[3:0]
+     8/43: $2\tmp_imm[11:0]
+     9/43: $2\o_op_w[3:0]
+    10/43: $2$mem2reg_rd$\registers_r$./codes/ID.v:81$430_DATA[63:0]$441
+    11/43: $2$mem2reg_rd$\registers_r$./codes/ID.v:80$429_DATA[63:0]$440
+    12/43: $1\o_finish_w[0:0]
+    13/43: $1\o_valid_w[0:0]
+    14/43: $1\o_imm_w[63:0]
+    15/43: $1\tmp_imm[11:0]
+    16/43: $1\o_op_w[3:0]
+    17/43: $1\o_rd_id_w[4:0]
+    18/43: $1\o_rs1_w[63:0]
+    19/43: $1$mem2reg_rd$\registers_r$./codes/ID.v:81$430_DATA[63:0]$438
+    20/43: $1$mem2reg_rd$\registers_r$./codes/ID.v:81$430_ADDR[4:0]$439
+    21/43: $1\o_rs2_w[63:0]
+    22/43: $1$mem2reg_rd$\registers_r$./codes/ID.v:80$429_DATA[63:0]$436
+    23/43: $1$mem2reg_rd$\registers_r$./codes/ID.v:80$429_ADDR[4:0]$437
+    24/43: $1\ins[9:0]
+    25/43: $2\o_valid_w[0:0]
+    26/43: $0$mem2reg_rd$\registers_r$./codes/ID.v:81$430_ADDR[4:0]$435
+    27/43: $0$mem2reg_rd$\registers_r$./codes/ID.v:81$430_DATA[63:0]$434
+    28/43: $0$mem2reg_rd$\registers_r$./codes/ID.v:80$429_ADDR[4:0]$433
+    29/43: $0$mem2reg_rd$\registers_r$./codes/ID.v:80$429_DATA[63:0]$432
+    30/43: $0\ins[9:0]
+    31/43: $0\op[6:0]
+    32/43: $0\rd[4:0]
+    33/43: $0\funct3[2:0]
+    34/43: $0\rs1[4:0]
+    35/43: $0\left_12[11:0]
+    36/43: $0\tmp_imm[11:0]
+    37/43: $0\o_op_w[3:0]
+    38/43: $0\o_imm_w[63:0]
+    39/43: $0\o_rd_id_w[4:0]
+    40/43: $0\o_rs2_w[63:0]
+    41/43: $0\o_rs1_w[63:0]
+    42/43: $0\o_finish_w[0:0]
+    43/43: $0\o_valid_w[0:0]
+Creating decoders for process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+     1/14: $0\cont_r[0:0]
+     2/14: $0\carry_r[0:0]
+     3/14: $0\tmp_r[63:0]
+     4/14: $0\op_r[3:0]
+     5/14: $0\rd_r[4:0]
+     6/14: $0\rs2_r[63:0]
+     7/14: $0\o_if_valid_r[0:0]
+     8/14: $0\o_new_pc_r[63:0]
+     9/14: $0\o_mem_valid_r[0:0]
+    10/14: $0\o_type_r[1:0]
+    11/14: $0\o_addr_r[63:0]
+    12/14: $0\o_data_r[63:0]
+    13/14: $0\o_rd_id_r[4:0]
+    14/14: $0\cs[3:0]
+Creating decoders for process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:385$329'.
+     1/2: $1\ns[3:0]
+     2/2: $0\ns[3:0]
+Creating decoders for process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+     1/171: $11\o_if_valid_w[0:0]
+     2/171: $11\o_new_pc_w[63:0]
+     3/171: $12\o_addr_w[63:0]
+     4/171: $11\cont_w[0:0]
+     5/171: $11\carry_w[0:0]
+     6/171: $13\tmp_w[63:0]
+     7/171: $10\op_w[3:0]
+     8/171: $10\rd_w[4:0]
+     9/171: $10\rs2_w[63:0]
+    10/171: $10\o_if_valid_w[0:0]
+    11/171: $10\o_new_pc_w[63:0]
+    12/171: $10\o_mem_valid_w[0:0]
+    13/171: $11\o_type_w[1:0]
+    14/171: $10\o_rd_id_w[4:0]
+    15/171: $11\o_data_w[63:0]
+    16/171: $11\o_addr_w[63:0]
+    17/171: $10\carry_w[0:0]
+    18/171: $12\tmp_w[63:0] [63:56]
+    19/171: $9\op_w[3:0]
+    20/171: $9\rd_w[4:0]
+    21/171: $9\rs2_w[63:0]
+    22/171: $9\o_if_valid_w[0:0]
+    23/171: $9\o_new_pc_w[63:0]
+    24/171: $9\o_mem_valid_w[0:0]
+    25/171: $10\o_type_w[1:0]
+    26/171: $9\o_rd_id_w[4:0]
+    27/171: $10\o_data_w[63:0]
+    28/171: $10\o_addr_w[63:0]
+    29/171: $10\cont_w[0:0]
+    30/171: $12\tmp_w[63:0] [55:0]
+    31/171: $11\tmp_w[63:0] [63:56]
+    32/171: $11\tmp_w[63:0] [55:48]
+    33/171: $8\op_w[3:0]
+    34/171: $8\rd_w[4:0]
+    35/171: $8\rs2_w[63:0]
+    36/171: $8\o_if_valid_w[0:0]
+    37/171: $8\o_new_pc_w[63:0]
+    38/171: $8\o_mem_valid_w[0:0]
+    39/171: $9\o_type_w[1:0]
+    40/171: $8\o_rd_id_w[4:0]
+    41/171: $9\o_data_w[63:0]
+    42/171: $9\o_addr_w[63:0]
+    43/171: $9\carry_w[0:0]
+    44/171: $9\cont_w[0:0]
+    45/171: $11\tmp_w[63:0] [47:0]
+    46/171: $10\tmp_w[63:0] [63:48]
+    47/171: $10\tmp_w[63:0] [47:40]
+    48/171: $7\op_w[3:0]
+    49/171: $7\rd_w[4:0]
+    50/171: $7\rs2_w[63:0]
+    51/171: $7\o_if_valid_w[0:0]
+    52/171: $7\o_new_pc_w[63:0]
+    53/171: $7\o_mem_valid_w[0:0]
+    54/171: $8\o_type_w[1:0]
+    55/171: $7\o_rd_id_w[4:0]
+    56/171: $8\o_data_w[63:0]
+    57/171: $8\o_addr_w[63:0]
+    58/171: $8\carry_w[0:0]
+    59/171: $8\cont_w[0:0]
+    60/171: $10\tmp_w[63:0] [39:0]
+    61/171: $9\tmp_w[63:0] [63:40]
+    62/171: $9\tmp_w[63:0] [39:32]
+    63/171: $6\op_w[3:0]
+    64/171: $6\rd_w[4:0]
+    65/171: $6\rs2_w[63:0]
+    66/171: $6\o_if_valid_w[0:0]
+    67/171: $6\o_new_pc_w[63:0]
+    68/171: $6\o_mem_valid_w[0:0]
+    69/171: $7\o_type_w[1:0]
+    70/171: $6\o_rd_id_w[4:0]
+    71/171: $7\o_data_w[63:0]
+    72/171: $7\o_addr_w[63:0]
+    73/171: $7\carry_w[0:0]
+    74/171: $7\cont_w[0:0]
+    75/171: $9\tmp_w[63:0] [31:0]
+    76/171: $8\tmp_w[63:0] [63:32]
+    77/171: $8\tmp_w[63:0] [31:24]
+    78/171: $5\op_w[3:0]
+    79/171: $5\rd_w[4:0]
+    80/171: $5\rs2_w[63:0]
+    81/171: $5\o_if_valid_w[0:0]
+    82/171: $5\o_new_pc_w[63:0]
+    83/171: $5\o_mem_valid_w[0:0]
+    84/171: $6\o_type_w[1:0]
+    85/171: $5\o_rd_id_w[4:0]
+    86/171: $6\o_data_w[63:0]
+    87/171: $6\o_addr_w[63:0]
+    88/171: $6\carry_w[0:0]
+    89/171: $6\cont_w[0:0]
+    90/171: $8\tmp_w[63:0] [23:0]
+    91/171: $7\tmp_w[63:0] [63:24]
+    92/171: $7\tmp_w[63:0] [23:16]
+    93/171: $4\op_w[3:0]
+    94/171: $4\rd_w[4:0]
+    95/171: $4\rs2_w[63:0]
+    96/171: $4\o_if_valid_w[0:0]
+    97/171: $4\o_new_pc_w[63:0]
+    98/171: $4\o_mem_valid_w[0:0]
+    99/171: $5\o_type_w[1:0]
+   100/171: $4\o_rd_id_w[4:0]
+   101/171: $5\o_data_w[63:0]
+   102/171: $5\o_addr_w[63:0]
+   103/171: $5\carry_w[0:0]
+   104/171: $5\cont_w[0:0]
+   105/171: $7\tmp_w[63:0] [15:0]
+   106/171: $6\tmp_w[63:0] [63:16]
+   107/171: $6\tmp_w[63:0] [15:8]
+   108/171: $3\op_w[3:0]
+   109/171: $3\rd_w[4:0]
+   110/171: $3\rs2_w[63:0]
+   111/171: $3\o_if_valid_w[0:0]
+   112/171: $3\o_new_pc_w[63:0]
+   113/171: $3\o_mem_valid_w[0:0]
+   114/171: $4\o_type_w[1:0]
+   115/171: $3\o_rd_id_w[4:0]
+   116/171: $4\o_data_w[63:0]
+   117/171: $4\o_addr_w[63:0]
+   118/171: $4\carry_w[0:0]
+   119/171: $4\cont_w[0:0]
+   120/171: $6\tmp_w[63:0] [7:0]
+   121/171: $5\tmp_w[63:0] [63:8]
+   122/171: $5\tmp_w[63:0] [7:0]
+   123/171: $2\op_w[3:0]
+   124/171: $2\rd_w[4:0]
+   125/171: $2\rs2_w[63:0]
+   126/171: $2\o_if_valid_w[0:0]
+   127/171: $2\o_new_pc_w[63:0]
+   128/171: $2\o_mem_valid_w[0:0]
+   129/171: $3\o_type_w[1:0]
+   130/171: $2\o_rd_id_w[4:0]
+   131/171: $3\o_data_w[63:0]
+   132/171: $3\o_addr_w[63:0]
+   133/171: $3\carry_w[0:0]
+   134/171: $3\cont_w[0:0]
+   135/171: $4\tmp_w[63:0]
+   136/171: $3\tmp_w[63:0]
+   137/171: $2\cont_w[0:0]
+   138/171: $2\o_type_w[1:0]
+   139/171: $2\carry_w[0:0]
+   140/171: $2\o_data_w[63:0]
+   141/171: $2\o_addr_w[63:0]
+   142/171: $2\tmp_w[63:0]
+   143/171: $2\i[31:0]
+   144/171: $1\o_if_valid_w[0:0]
+   145/171: $1\o_new_pc_w[63:0]
+   146/171: $1\o_mem_valid_w[0:0]
+   147/171: $1\o_rd_id_w[4:0]
+   148/171: $1\cont_w[0:0]
+   149/171: $1\carry_w[0:0]
+   150/171: $1\tmp_w[63:0]
+   151/171: $1\o_type_w[1:0]
+   152/171: $1\o_data_w[63:0]
+   153/171: $1\o_addr_w[63:0]
+   154/171: $1\i[31:0]
+   155/171: $1\op_w[3:0]
+   156/171: $1\rd_w[4:0]
+   157/171: $1\rs2_w[63:0]
+   158/171: $0\cont_w[0:0]
+   159/171: $0\carry_w[0:0]
+   160/171: $0\tmp_w[63:0]
+   161/171: $0\op_w[3:0]
+   162/171: $0\rd_w[4:0]
+   163/171: $0\rs2_w[63:0]
+   164/171: $0\o_if_valid_w[0:0]
+   165/171: $0\o_new_pc_w[63:0]
+   166/171: $0\o_mem_valid_w[0:0]
+   167/171: $0\o_type_w[1:0]
+   168/171: $0\o_data_w[63:0]
+   169/171: $0\o_addr_w[63:0]
+   170/171: $0\i[31:0]
+   171/171: $0\o_rd_id_w[4:0]
+Creating decoders for process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+     1/10: $0\o_d_MemWrite_r[0:0]
+     2/10: $0\o_d_MemRead_r[0:0]
+     3/10: $0\o_d_w_addr_r[63:0]
+     4/10: $0\o_d_w_data_r[63:0]
+     5/10: $0\o_d_r_addr_r[63:0]
+     6/10: $0\o_type_r[1:0]
+     7/10: $0\o_data_r[63:0]
+     8/10: $0\o_rd_id_r[4:0]
+     9/10: $0\cs[1:0]
+    10/10: $0\o_valid_r[0:0]
+Creating decoders for process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:95$272'.
+     1/2: $1\ns[1:0]
+     2/2: $0\ns[1:0]
+Creating decoders for process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+     1/37: $2\o_valid_w[0:0]
+     2/37: $2\o_type_w[1:0]
+     3/37: $2\o_rd_id_w[4:0]
+     4/37: $2\o_data_w[63:0]
+     5/37: $4\o_d_MemWrite_w[0:0]
+     6/37: $4\o_d_MemRead_w[0:0]
+     7/37: $4\o_d_w_addr_w[63:0]
+     8/37: $4\o_d_r_addr_w[63:0]
+     9/37: $4\o_d_w_data_w[63:0]
+    10/37: $3\o_d_MemWrite_w[0:0]
+    11/37: $3\o_d_MemRead_w[0:0]
+    12/37: $3\o_d_w_addr_w[63:0]
+    13/37: $3\o_d_r_addr_w[63:0]
+    14/37: $3\o_d_w_data_w[63:0]
+    15/37: $2\o_d_MemWrite_w[0:0]
+    16/37: $2\o_d_MemRead_w[0:0]
+    17/37: $2\o_d_w_addr_w[63:0]
+    18/37: $2\o_d_r_addr_w[63:0]
+    19/37: $2\o_d_w_data_w[63:0]
+    20/37: $1\o_valid_w[0:0]
+    21/37: $1\o_type_w[1:0]
+    22/37: $1\o_rd_id_w[4:0]
+    23/37: $1\o_data_w[63:0]
+    24/37: $1\o_d_MemWrite_w[0:0]
+    25/37: $1\o_d_MemRead_w[0:0]
+    26/37: $1\o_d_w_addr_w[63:0]
+    27/37: $1\o_d_r_addr_w[63:0]
+    28/37: $1\o_d_w_data_w[63:0]
+    29/37: $0\o_d_MemWrite_w[0:0]
+    30/37: $0\o_d_MemRead_w[0:0]
+    31/37: $0\o_d_w_addr_w[63:0]
+    32/37: $0\o_d_r_addr_w[63:0]
+    33/37: $0\o_d_w_data_w[63:0]
+    34/37: $0\o_type_w[1:0]
+    35/37: $0\o_data_w[63:0]
+    36/37: $0\o_rd_id_w[4:0]
+    37/37: $0\o_valid_w[0:0]
+Creating decoders for process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+     1/3: $0\o_data_r[63:0]
+     2/3: $0\o_rd_id_r[4:0]
+     3/3: $0\o_valid_r[0:0]
+Creating decoders for process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+     1/12: $3\o_valid_w[0:0]
+     2/12: $3\o_rd_id_w[4:0]
+     3/12: $3\o_data_w[63:0]
+     4/12: $2\o_valid_w[0:0]
+     5/12: $2\o_rd_id_w[4:0]
+     6/12: $2\o_data_w[63:0]
+     7/12: $1\o_data_w[63:0]
+     8/12: $1\o_rd_id_w[4:0]
+     9/12: $1\o_valid_w[0:0]
+    10/12: $0\o_data_w[63:0]
+    11/12: $0\o_rd_id_w[4:0]
+    12/12: $0\o_valid_w[0:0]
+
+7.2.6. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_i_valid_addr_w' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_i_addr_w' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_pc_w' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_w' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\pc_w' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+No latch inferred for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\ns' from process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:30$510'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\i' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[0]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[1]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[2]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[3]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[4]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[5]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[6]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[7]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[8]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[9]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[10]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[11]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[12]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[13]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[14]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[15]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[16]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[17]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[18]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[19]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[20]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[21]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[22]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[23]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[24]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[25]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[26]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[27]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[28]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[29]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[30]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_w[31]' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_finish_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rs1_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rs2_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_imm_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_op_w' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$mem2reg_rd$\registers_r$./codes/ID.v:80$429_DATA' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$mem2reg_rd$\registers_r$./codes/ID.v:80$429_ADDR' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$mem2reg_rd$\registers_r$./codes/ID.v:81$430_DATA' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+No latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$mem2reg_rd$\registers_r$./codes/ID.v:81$430_ADDR' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\tmp_imm' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3719
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\left_12' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3730
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\rs1' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3733
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\funct3' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3736
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\rd' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3739
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\op' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3742
+Latch inferred for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\ins' from process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431': $auto$proc_dlatch.cc:409:proc_dlatch$3745
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\ns' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:385$329'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_addr_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_type_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_mem_valid_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_new_pc_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_if_valid_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\rs2_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\rd_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\op_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\tmp_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\carry_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+No latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\cont_w' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+Latch inferred for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\i' from process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276': $auto$proc_dlatch.cc:409:proc_dlatch$3748
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\ns' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:95$272'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_type_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_w_data_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_r_addr_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_w_addr_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_MemRead_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_MemWrite_w' from process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+No latch inferred for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_w' from process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+No latch inferred for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_w' from process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+No latch inferred for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_w' from process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+
+7.2.7. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_i_valid_addr_r' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3777' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_i_addr_r' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3778' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_pc_r' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3779' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_r' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3780' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\pc_r' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3781' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.\cs' using process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+  created $adff cell `$procdff$3782' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3783' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rs1_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3784' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_imm_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3785' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rs2_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3786' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3787' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_finish_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3788' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\o_op_r' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3789' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\i' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $dff cell `$procdff$3790' with positive edge clock.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[0]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3791' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[1]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3792' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[2]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3793' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[3]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3794' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[4]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3795' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[5]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3796' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[6]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3797' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[7]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3798' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[8]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3799' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[9]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3800' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[10]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3801' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[11]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3802' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[12]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3803' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[13]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3804' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[14]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3805' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[15]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3806' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[16]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3807' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[17]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3808' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[18]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3809' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[19]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3810' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[20]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3811' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[21]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3812' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[22]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3813' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[23]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3814' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[24]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3815' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[25]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3816' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[26]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3817' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[27]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3818' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[28]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3819' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[29]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3820' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[30]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3821' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.\registers_r[31]' using process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+  created $adff cell `$procdff$3822' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\cs' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3823' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3824' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3825' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_addr_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3826' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_type_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3827' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_mem_valid_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3828' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_new_pc_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3829' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\o_if_valid_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3830' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\rs2_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3831' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\rd_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3832' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\op_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3833' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\tmp_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3834' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\carry_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3835' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.\cont_r' using process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+  created $adff cell `$procdff$3836' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3837' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\cs' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3838' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3839' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3840' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_type_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3841' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_r_addr_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3842' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_w_data_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3843' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_w_addr_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3844' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_MemRead_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3845' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.\o_d_MemWrite_r' using process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+  created $adff cell `$procdff$3846' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_valid_r' using process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+  created $adff cell `$procdff$3847' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_rd_id_r' using process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+  created $adff cell `$procdff$3848' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.\o_data_r' using process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+  created $adff cell `$procdff$3849' with positive edge clock and negative level reset.
+
+7.2.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:89$517'.
+Found and cleaned up 4 empty switches in `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+Removing empty process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:59$512'.
+Found and cleaned up 1 empty switch in `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:30$510'.
+Removing empty process `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/IF.v:30$510'.
+Removing empty process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:189$508'.
+Found and cleaned up 32 empty switches in `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+Removing empty process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:179$443'.
+Found and cleaned up 6 empty switches in `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+Removing empty process `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/ID.v:68$431'.
+Removing empty process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:402$331'.
+Found and cleaned up 1 empty switch in `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:385$329'.
+Removing empty process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:385$329'.
+Found and cleaned up 15 empty switches in `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+Removing empty process `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/EX.v:67$276'.
+Removing empty process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:105$274'.
+Found and cleaned up 1 empty switch in `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:95$272'.
+Removing empty process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:95$272'.
+Found and cleaned up 4 empty switches in `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+Removing empty process `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/MEM.v:47$266'.
+Removing empty process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:51$264'.
+Found and cleaned up 3 empty switches in `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+Removing empty process `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.$proc$./codes/WB.v:28$260'.
+Cleaned up 67 empty switches.
+
+7.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~22 debug messages>
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~18 debug messages>
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~3 debug messages>
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~1 debug messages>
+Optimizing module cpu.
+
+7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 81 unused cells and 1583 unused wires.
+<suppressed ~96 debug messages>
+
+7.5. Executing CHECK pass (checking for obvious problems).
+checking module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module cpu..
+found and reported 0 problems.
+
+7.6. Executing OPT pass (performing simple optimizations).
+
+7.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~105 debug messages>
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 49 cells.
+
+7.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1003.
+    dead port 1/2 on $mux $procmux$1006.
+    dead port 1/2 on $mux $procmux$1009.
+    dead port 1/2 on $mux $procmux$1012.
+    dead port 1/2 on $mux $procmux$1015.
+    dead port 1/2 on $mux $procmux$1018.
+    dead port 1/2 on $mux $procmux$1021.
+    dead port 1/2 on $mux $procmux$1024.
+    dead port 1/2 on $mux $procmux$1027.
+    dead port 1/2 on $mux $procmux$1032.
+    dead port 1/2 on $mux $procmux$1035.
+    dead port 1/2 on $mux $procmux$1038.
+    dead port 1/2 on $mux $procmux$1041.
+    dead port 1/2 on $mux $procmux$1044.
+    dead port 1/2 on $mux $procmux$1047.
+    dead port 1/2 on $mux $procmux$1050.
+    dead port 1/2 on $mux $procmux$1053.
+    dead port 1/2 on $mux $procmux$1056.
+    dead port 1/2 on $mux $procmux$1119.
+    dead port 1/2 on $mux $procmux$1122.
+    dead port 1/2 on $mux $procmux$1125.
+    dead port 1/2 on $mux $procmux$1128.
+    dead port 1/2 on $mux $procmux$1131.
+    dead port 1/2 on $mux $procmux$1134.
+    dead port 1/2 on $mux $procmux$1137.
+    dead port 1/2 on $mux $procmux$1140.
+    dead port 1/2 on $mux $procmux$1143.
+    dead port 1/2 on $mux $procmux$1148.
+    dead port 1/2 on $mux $procmux$1151.
+    dead port 1/2 on $mux $procmux$1154.
+    dead port 1/2 on $mux $procmux$1157.
+    dead port 1/2 on $mux $procmux$1160.
+    dead port 1/2 on $mux $procmux$1163.
+    dead port 1/2 on $mux $procmux$1166.
+    dead port 1/2 on $mux $procmux$1169.
+    dead port 1/2 on $mux $procmux$1172.
+    dead port 1/2 on $mux $procmux$1178.
+    dead port 1/2 on $mux $procmux$1181.
+    dead port 1/2 on $mux $procmux$1184.
+    dead port 1/2 on $mux $procmux$1187.
+    dead port 1/2 on $mux $procmux$1190.
+    dead port 1/2 on $mux $procmux$1193.
+    dead port 1/2 on $mux $procmux$1196.
+    dead port 1/2 on $mux $procmux$1199.
+    dead port 1/2 on $mux $procmux$1202.
+    dead port 1/2 on $mux $procmux$1208.
+    dead port 1/2 on $mux $procmux$1211.
+    dead port 1/2 on $mux $procmux$1214.
+    dead port 1/2 on $mux $procmux$1217.
+    dead port 1/2 on $mux $procmux$1220.
+    dead port 1/2 on $mux $procmux$1223.
+    dead port 1/2 on $mux $procmux$1226.
+    dead port 1/2 on $mux $procmux$1229.
+    dead port 1/2 on $mux $procmux$1232.
+    dead port 1/2 on $mux $procmux$1238.
+    dead port 1/2 on $mux $procmux$1241.
+    dead port 1/2 on $mux $procmux$1244.
+    dead port 1/2 on $mux $procmux$1247.
+    dead port 1/2 on $mux $procmux$1250.
+    dead port 1/2 on $mux $procmux$1253.
+    dead port 1/2 on $mux $procmux$1256.
+    dead port 1/2 on $mux $procmux$1259.
+    dead port 1/2 on $mux $procmux$1262.
+    dead port 1/2 on $mux $procmux$1267.
+    dead port 1/2 on $mux $procmux$1270.
+    dead port 1/2 on $mux $procmux$1273.
+    dead port 1/2 on $mux $procmux$1276.
+    dead port 1/2 on $mux $procmux$1279.
+    dead port 1/2 on $mux $procmux$1282.
+    dead port 1/2 on $mux $procmux$1285.
+    dead port 1/2 on $mux $procmux$1288.
+    dead port 1/2 on $mux $procmux$1291.
+    dead port 1/2 on $mux $procmux$1297.
+    dead port 1/2 on $mux $procmux$1300.
+    dead port 1/2 on $mux $procmux$1303.
+    dead port 1/2 on $mux $procmux$1306.
+    dead port 1/2 on $mux $procmux$1309.
+    dead port 1/2 on $mux $procmux$1312.
+    dead port 1/2 on $mux $procmux$1315.
+    dead port 1/2 on $mux $procmux$1318.
+    dead port 1/2 on $mux $procmux$1321.
+    dead port 1/2 on $mux $procmux$1327.
+    dead port 1/2 on $mux $procmux$1330.
+    dead port 1/2 on $mux $procmux$1333.
+    dead port 1/2 on $mux $procmux$1336.
+    dead port 1/2 on $mux $procmux$1339.
+    dead port 1/2 on $mux $procmux$1342.
+    dead port 1/2 on $mux $procmux$1345.
+    dead port 1/2 on $mux $procmux$1348.
+    dead port 1/2 on $mux $procmux$1351.
+    dead port 1/2 on $mux $procmux$1357.
+    dead port 1/2 on $mux $procmux$1360.
+    dead port 1/2 on $mux $procmux$1363.
+    dead port 1/2 on $mux $procmux$1366.
+    dead port 1/2 on $mux $procmux$1369.
+    dead port 1/2 on $mux $procmux$1372.
+    dead port 1/2 on $mux $procmux$1375.
+    dead port 1/2 on $mux $procmux$1378.
+    dead port 1/2 on $mux $procmux$1381.
+    dead port 1/2 on $mux $procmux$1387.
+    dead port 1/2 on $mux $procmux$1390.
+    dead port 1/2 on $mux $procmux$1393.
+    dead port 1/2 on $mux $procmux$1396.
+    dead port 1/2 on $mux $procmux$1399.
+    dead port 1/2 on $mux $procmux$1402.
+    dead port 1/2 on $mux $procmux$1405.
+    dead port 1/2 on $mux $procmux$1408.
+    dead port 1/2 on $mux $procmux$1414.
+    dead port 1/2 on $mux $procmux$1417.
+    dead port 1/2 on $mux $procmux$1420.
+    dead port 1/2 on $mux $procmux$1423.
+    dead port 1/2 on $mux $procmux$1426.
+    dead port 1/2 on $mux $procmux$1429.
+    dead port 1/2 on $mux $procmux$1432.
+    dead port 1/2 on $mux $procmux$1435.
+    dead port 1/2 on $mux $procmux$1468.
+    dead port 1/2 on $mux $procmux$1471.
+    dead port 1/2 on $mux $procmux$1474.
+    dead port 1/2 on $mux $procmux$1477.
+    dead port 1/2 on $mux $procmux$1480.
+    dead port 1/2 on $mux $procmux$1483.
+    dead port 1/2 on $mux $procmux$1486.
+    dead port 1/2 on $mux $procmux$1489.
+    dead port 1/2 on $mux $procmux$1495.
+    dead port 1/2 on $mux $procmux$1498.
+    dead port 1/2 on $mux $procmux$1501.
+    dead port 1/2 on $mux $procmux$1504.
+    dead port 1/2 on $mux $procmux$1507.
+    dead port 1/2 on $mux $procmux$1510.
+    dead port 1/2 on $mux $procmux$1513.
+    dead port 1/2 on $mux $procmux$1516.
+    dead port 1/2 on $mux $procmux$1522.
+    dead port 1/2 on $mux $procmux$1525.
+    dead port 1/2 on $mux $procmux$1528.
+    dead port 1/2 on $mux $procmux$1531.
+    dead port 1/2 on $mux $procmux$1534.
+    dead port 1/2 on $mux $procmux$1537.
+    dead port 1/2 on $mux $procmux$1540.
+    dead port 1/2 on $mux $procmux$1543.
+    dead port 1/2 on $mux $procmux$1549.
+    dead port 1/2 on $mux $procmux$1552.
+    dead port 1/2 on $mux $procmux$1555.
+    dead port 1/2 on $mux $procmux$1558.
+    dead port 1/2 on $mux $procmux$1561.
+    dead port 1/2 on $mux $procmux$1564.
+    dead port 1/2 on $mux $procmux$1567.
+    dead port 1/2 on $mux $procmux$1570.
+    dead port 1/2 on $mux $procmux$1576.
+    dead port 1/2 on $mux $procmux$1579.
+    dead port 1/2 on $mux $procmux$1582.
+    dead port 1/2 on $mux $procmux$1585.
+    dead port 1/2 on $mux $procmux$1588.
+    dead port 1/2 on $mux $procmux$1591.
+    dead port 1/2 on $mux $procmux$1594.
+    dead port 1/2 on $mux $procmux$1597.
+    dead port 1/2 on $mux $procmux$1603.
+    dead port 1/2 on $mux $procmux$1606.
+    dead port 1/2 on $mux $procmux$1609.
+    dead port 1/2 on $mux $procmux$1612.
+    dead port 1/2 on $mux $procmux$1615.
+    dead port 1/2 on $mux $procmux$1618.
+    dead port 1/2 on $mux $procmux$1621.
+    dead port 1/2 on $mux $procmux$1624.
+    dead port 1/2 on $mux $procmux$1630.
+    dead port 1/2 on $mux $procmux$1633.
+    dead port 1/2 on $mux $procmux$1636.
+    dead port 1/2 on $mux $procmux$1639.
+    dead port 1/2 on $mux $procmux$1642.
+    dead port 1/2 on $mux $procmux$1645.
+    dead port 1/2 on $mux $procmux$1648.
+    dead port 1/2 on $mux $procmux$1651.
+    dead port 1/2 on $mux $procmux$1657.
+    dead port 1/2 on $mux $procmux$1660.
+    dead port 1/2 on $mux $procmux$1663.
+    dead port 1/2 on $mux $procmux$1666.
+    dead port 1/2 on $mux $procmux$1669.
+    dead port 1/2 on $mux $procmux$1672.
+    dead port 1/2 on $mux $procmux$1675.
+    dead port 1/2 on $mux $procmux$1678.
+    dead port 1/2 on $mux $procmux$1684.
+    dead port 1/2 on $mux $procmux$1687.
+    dead port 1/2 on $mux $procmux$1690.
+    dead port 1/2 on $mux $procmux$1693.
+    dead port 1/2 on $mux $procmux$1696.
+    dead port 1/2 on $mux $procmux$1699.
+    dead port 1/2 on $mux $procmux$1702.
+    dead port 1/2 on $mux $procmux$1705.
+    dead port 1/2 on $mux $procmux$1711.
+    dead port 1/2 on $mux $procmux$1714.
+    dead port 1/2 on $mux $procmux$1717.
+    dead port 1/2 on $mux $procmux$1720.
+    dead port 1/2 on $mux $procmux$1723.
+    dead port 1/2 on $mux $procmux$1726.
+    dead port 1/2 on $mux $procmux$1729.
+    dead port 1/2 on $mux $procmux$1732.
+    dead port 1/2 on $mux $procmux$1765.
+    dead port 1/2 on $mux $procmux$1768.
+    dead port 1/2 on $mux $procmux$1771.
+    dead port 1/2 on $mux $procmux$1774.
+    dead port 1/2 on $mux $procmux$1777.
+    dead port 1/2 on $mux $procmux$1780.
+    dead port 1/2 on $mux $procmux$1783.
+    dead port 1/2 on $mux $procmux$1789.
+    dead port 1/2 on $mux $procmux$1792.
+    dead port 1/2 on $mux $procmux$1795.
+    dead port 1/2 on $mux $procmux$1798.
+    dead port 1/2 on $mux $procmux$1801.
+    dead port 1/2 on $mux $procmux$1804.
+    dead port 1/2 on $mux $procmux$1807.
+    dead port 1/2 on $mux $procmux$1837.
+    dead port 1/2 on $mux $procmux$1840.
+    dead port 1/2 on $mux $procmux$1843.
+    dead port 1/2 on $mux $procmux$1846.
+    dead port 1/2 on $mux $procmux$1849.
+    dead port 1/2 on $mux $procmux$1852.
+    dead port 1/2 on $mux $procmux$1855.
+    dead port 1/2 on $mux $procmux$1861.
+    dead port 1/2 on $mux $procmux$1864.
+    dead port 1/2 on $mux $procmux$1867.
+    dead port 1/2 on $mux $procmux$1870.
+    dead port 1/2 on $mux $procmux$1873.
+    dead port 1/2 on $mux $procmux$1876.
+    dead port 1/2 on $mux $procmux$1879.
+    dead port 1/2 on $mux $procmux$1885.
+    dead port 1/2 on $mux $procmux$1888.
+    dead port 1/2 on $mux $procmux$1891.
+    dead port 1/2 on $mux $procmux$1894.
+    dead port 1/2 on $mux $procmux$1897.
+    dead port 1/2 on $mux $procmux$1900.
+    dead port 1/2 on $mux $procmux$1903.
+    dead port 1/2 on $mux $procmux$1909.
+    dead port 1/2 on $mux $procmux$1912.
+    dead port 1/2 on $mux $procmux$1915.
+    dead port 1/2 on $mux $procmux$1918.
+    dead port 1/2 on $mux $procmux$1921.
+    dead port 1/2 on $mux $procmux$1924.
+    dead port 1/2 on $mux $procmux$1927.
+    dead port 1/2 on $mux $procmux$1933.
+    dead port 1/2 on $mux $procmux$1936.
+    dead port 1/2 on $mux $procmux$1939.
+    dead port 1/2 on $mux $procmux$1942.
+    dead port 1/2 on $mux $procmux$1945.
+    dead port 1/2 on $mux $procmux$1948.
+    dead port 1/2 on $mux $procmux$1951.
+    dead port 1/2 on $mux $procmux$1957.
+    dead port 1/2 on $mux $procmux$1960.
+    dead port 1/2 on $mux $procmux$1963.
+    dead port 1/2 on $mux $procmux$1966.
+    dead port 1/2 on $mux $procmux$1969.
+    dead port 1/2 on $mux $procmux$1972.
+    dead port 1/2 on $mux $procmux$1975.
+    dead port 1/2 on $mux $procmux$1981.
+    dead port 1/2 on $mux $procmux$1984.
+    dead port 1/2 on $mux $procmux$1987.
+    dead port 1/2 on $mux $procmux$1990.
+    dead port 1/2 on $mux $procmux$1993.
+    dead port 1/2 on $mux $procmux$1996.
+    dead port 1/2 on $mux $procmux$1999.
+    dead port 1/2 on $mux $procmux$2005.
+    dead port 1/2 on $mux $procmux$2008.
+    dead port 1/2 on $mux $procmux$2011.
+    dead port 1/2 on $mux $procmux$2014.
+    dead port 1/2 on $mux $procmux$2017.
+    dead port 1/2 on $mux $procmux$2020.
+    dead port 1/2 on $mux $procmux$2023.
+    dead port 1/2 on $mux $procmux$2029.
+    dead port 1/2 on $mux $procmux$2032.
+    dead port 1/2 on $mux $procmux$2035.
+    dead port 1/2 on $mux $procmux$2038.
+    dead port 1/2 on $mux $procmux$2041.
+    dead port 1/2 on $mux $procmux$2044.
+    dead port 1/2 on $mux $procmux$2047.
+    dead port 1/2 on $mux $procmux$2053.
+    dead port 1/2 on $mux $procmux$2056.
+    dead port 1/2 on $mux $procmux$2059.
+    dead port 1/2 on $mux $procmux$2062.
+    dead port 1/2 on $mux $procmux$2065.
+    dead port 1/2 on $mux $procmux$2068.
+    dead port 1/2 on $mux $procmux$2071.
+    dead port 1/2 on $mux $procmux$2077.
+    dead port 1/2 on $mux $procmux$2080.
+    dead port 1/2 on $mux $procmux$2083.
+    dead port 1/2 on $mux $procmux$2086.
+    dead port 1/2 on $mux $procmux$2089.
+    dead port 1/2 on $mux $procmux$2092.
+    dead port 1/2 on $mux $procmux$2095.
+    dead port 1/2 on $mux $procmux$2125.
+    dead port 1/2 on $mux $procmux$2128.
+    dead port 1/2 on $mux $procmux$2131.
+    dead port 1/2 on $mux $procmux$2134.
+    dead port 1/2 on $mux $procmux$2137.
+    dead port 1/2 on $mux $procmux$2140.
+    dead port 1/2 on $mux $procmux$2146.
+    dead port 1/2 on $mux $procmux$2149.
+    dead port 1/2 on $mux $procmux$2152.
+    dead port 1/2 on $mux $procmux$2155.
+    dead port 1/2 on $mux $procmux$2158.
+    dead port 1/2 on $mux $procmux$2161.
+    dead port 1/2 on $mux $procmux$2188.
+    dead port 1/2 on $mux $procmux$2191.
+    dead port 1/2 on $mux $procmux$2194.
+    dead port 1/2 on $mux $procmux$2197.
+    dead port 1/2 on $mux $procmux$2200.
+    dead port 1/2 on $mux $procmux$2203.
+    dead port 1/2 on $mux $procmux$2209.
+    dead port 1/2 on $mux $procmux$2212.
+    dead port 1/2 on $mux $procmux$2215.
+    dead port 1/2 on $mux $procmux$2218.
+    dead port 1/2 on $mux $procmux$2221.
+    dead port 1/2 on $mux $procmux$2224.
+    dead port 1/2 on $mux $procmux$2230.
+    dead port 1/2 on $mux $procmux$2233.
+    dead port 1/2 on $mux $procmux$2236.
+    dead port 1/2 on $mux $procmux$2239.
+    dead port 1/2 on $mux $procmux$2242.
+    dead port 1/2 on $mux $procmux$2245.
+    dead port 1/2 on $mux $procmux$2251.
+    dead port 1/2 on $mux $procmux$2254.
+    dead port 1/2 on $mux $procmux$2257.
+    dead port 1/2 on $mux $procmux$2260.
+    dead port 1/2 on $mux $procmux$2263.
+    dead port 1/2 on $mux $procmux$2266.
+    dead port 1/2 on $mux $procmux$2272.
+    dead port 1/2 on $mux $procmux$2275.
+    dead port 1/2 on $mux $procmux$2278.
+    dead port 1/2 on $mux $procmux$2281.
+    dead port 1/2 on $mux $procmux$2284.
+    dead port 1/2 on $mux $procmux$2287.
+    dead port 1/2 on $mux $procmux$2293.
+    dead port 1/2 on $mux $procmux$2296.
+    dead port 1/2 on $mux $procmux$2299.
+    dead port 1/2 on $mux $procmux$2302.
+    dead port 1/2 on $mux $procmux$2305.
+    dead port 1/2 on $mux $procmux$2308.
+    dead port 1/2 on $mux $procmux$2314.
+    dead port 1/2 on $mux $procmux$2317.
+    dead port 1/2 on $mux $procmux$2320.
+    dead port 1/2 on $mux $procmux$2323.
+    dead port 1/2 on $mux $procmux$2326.
+    dead port 1/2 on $mux $procmux$2329.
+    dead port 1/2 on $mux $procmux$2335.
+    dead port 1/2 on $mux $procmux$2338.
+    dead port 1/2 on $mux $procmux$2341.
+    dead port 1/2 on $mux $procmux$2344.
+    dead port 1/2 on $mux $procmux$2347.
+    dead port 1/2 on $mux $procmux$2350.
+    dead port 1/2 on $mux $procmux$2356.
+    dead port 1/2 on $mux $procmux$2359.
+    dead port 1/2 on $mux $procmux$2362.
+    dead port 1/2 on $mux $procmux$2365.
+    dead port 1/2 on $mux $procmux$2368.
+    dead port 1/2 on $mux $procmux$2371.
+    dead port 1/2 on $mux $procmux$2377.
+    dead port 1/2 on $mux $procmux$2380.
+    dead port 1/2 on $mux $procmux$2383.
+    dead port 1/2 on $mux $procmux$2386.
+    dead port 1/2 on $mux $procmux$2389.
+    dead port 1/2 on $mux $procmux$2392.
+    dead port 1/2 on $mux $procmux$2398.
+    dead port 1/2 on $mux $procmux$2401.
+    dead port 1/2 on $mux $procmux$2404.
+    dead port 1/2 on $mux $procmux$2407.
+    dead port 1/2 on $mux $procmux$2410.
+    dead port 1/2 on $mux $procmux$2413.
+    dead port 1/2 on $mux $procmux$2440.
+    dead port 1/2 on $mux $procmux$2443.
+    dead port 1/2 on $mux $procmux$2446.
+    dead port 1/2 on $mux $procmux$2449.
+    dead port 1/2 on $mux $procmux$2452.
+    dead port 1/2 on $mux $procmux$2458.
+    dead port 1/2 on $mux $procmux$2461.
+    dead port 1/2 on $mux $procmux$2464.
+    dead port 1/2 on $mux $procmux$2467.
+    dead port 1/2 on $mux $procmux$2470.
+    dead port 1/2 on $mux $procmux$2494.
+    dead port 1/2 on $mux $procmux$2497.
+    dead port 1/2 on $mux $procmux$2500.
+    dead port 1/2 on $mux $procmux$2503.
+    dead port 1/2 on $mux $procmux$2506.
+    dead port 1/2 on $mux $procmux$2512.
+    dead port 1/2 on $mux $procmux$2515.
+    dead port 1/2 on $mux $procmux$2518.
+    dead port 1/2 on $mux $procmux$2521.
+    dead port 1/2 on $mux $procmux$2524.
+    dead port 1/2 on $mux $procmux$2530.
+    dead port 1/2 on $mux $procmux$2533.
+    dead port 1/2 on $mux $procmux$2536.
+    dead port 1/2 on $mux $procmux$2539.
+    dead port 1/2 on $mux $procmux$2542.
+    dead port 1/2 on $mux $procmux$2548.
+    dead port 1/2 on $mux $procmux$2551.
+    dead port 1/2 on $mux $procmux$2554.
+    dead port 1/2 on $mux $procmux$2557.
+    dead port 1/2 on $mux $procmux$2560.
+    dead port 1/2 on $mux $procmux$2566.
+    dead port 1/2 on $mux $procmux$2569.
+    dead port 1/2 on $mux $procmux$2572.
+    dead port 1/2 on $mux $procmux$2575.
+    dead port 1/2 on $mux $procmux$2578.
+    dead port 1/2 on $mux $procmux$2584.
+    dead port 1/2 on $mux $procmux$2587.
+    dead port 1/2 on $mux $procmux$2590.
+    dead port 1/2 on $mux $procmux$2593.
+    dead port 1/2 on $mux $procmux$2596.
+    dead port 1/2 on $mux $procmux$2602.
+    dead port 1/2 on $mux $procmux$2605.
+    dead port 1/2 on $mux $procmux$2608.
+    dead port 1/2 on $mux $procmux$2611.
+    dead port 1/2 on $mux $procmux$2614.
+    dead port 1/2 on $mux $procmux$2620.
+    dead port 1/2 on $mux $procmux$2623.
+    dead port 1/2 on $mux $procmux$2626.
+    dead port 1/2 on $mux $procmux$2629.
+    dead port 1/2 on $mux $procmux$2632.
+    dead port 1/2 on $mux $procmux$2638.
+    dead port 1/2 on $mux $procmux$2641.
+    dead port 1/2 on $mux $procmux$2644.
+    dead port 1/2 on $mux $procmux$2647.
+    dead port 1/2 on $mux $procmux$2650.
+    dead port 1/2 on $mux $procmux$2656.
+    dead port 1/2 on $mux $procmux$2659.
+    dead port 1/2 on $mux $procmux$2662.
+    dead port 1/2 on $mux $procmux$2665.
+    dead port 1/2 on $mux $procmux$2668.
+    dead port 1/2 on $mux $procmux$2674.
+    dead port 1/2 on $mux $procmux$2677.
+    dead port 1/2 on $mux $procmux$2680.
+    dead port 1/2 on $mux $procmux$2683.
+    dead port 1/2 on $mux $procmux$2686.
+    dead port 1/2 on $mux $procmux$2692.
+    dead port 1/2 on $mux $procmux$2695.
+    dead port 1/2 on $mux $procmux$2698.
+    dead port 1/2 on $mux $procmux$2701.
+    dead port 1/2 on $mux $procmux$2704.
+    dead port 1/2 on $mux $procmux$2710.
+    dead port 1/2 on $mux $procmux$2713.
+    dead port 1/2 on $mux $procmux$2716.
+    dead port 1/2 on $mux $procmux$2719.
+    dead port 1/2 on $mux $procmux$2725.
+    dead port 1/2 on $mux $procmux$2728.
+    dead port 1/2 on $mux $procmux$2731.
+    dead port 1/2 on $mux $procmux$2734.
+    dead port 1/2 on $mux $procmux$2755.
+    dead port 1/2 on $mux $procmux$2758.
+    dead port 1/2 on $mux $procmux$2761.
+    dead port 1/2 on $mux $procmux$2764.
+    dead port 1/2 on $mux $procmux$2770.
+    dead port 1/2 on $mux $procmux$2773.
+    dead port 1/2 on $mux $procmux$2776.
+    dead port 1/2 on $mux $procmux$2779.
+    dead port 1/2 on $mux $procmux$2785.
+    dead port 1/2 on $mux $procmux$2788.
+    dead port 1/2 on $mux $procmux$2791.
+    dead port 1/2 on $mux $procmux$2794.
+    dead port 1/2 on $mux $procmux$2800.
+    dead port 1/2 on $mux $procmux$2803.
+    dead port 1/2 on $mux $procmux$2806.
+    dead port 1/2 on $mux $procmux$2809.
+    dead port 1/2 on $mux $procmux$2815.
+    dead port 1/2 on $mux $procmux$2818.
+    dead port 1/2 on $mux $procmux$2821.
+    dead port 1/2 on $mux $procmux$2824.
+    dead port 1/2 on $mux $procmux$2830.
+    dead port 1/2 on $mux $procmux$2833.
+    dead port 1/2 on $mux $procmux$2836.
+    dead port 1/2 on $mux $procmux$2839.
+    dead port 1/2 on $mux $procmux$2845.
+    dead port 1/2 on $mux $procmux$2848.
+    dead port 1/2 on $mux $procmux$2851.
+    dead port 1/2 on $mux $procmux$2854.
+    dead port 1/2 on $mux $procmux$2860.
+    dead port 1/2 on $mux $procmux$2863.
+    dead port 1/2 on $mux $procmux$2866.
+    dead port 1/2 on $mux $procmux$2869.
+    dead port 1/2 on $mux $procmux$2875.
+    dead port 1/2 on $mux $procmux$2878.
+    dead port 1/2 on $mux $procmux$2881.
+    dead port 1/2 on $mux $procmux$2884.
+    dead port 1/2 on $mux $procmux$2890.
+    dead port 1/2 on $mux $procmux$2893.
+    dead port 1/2 on $mux $procmux$2896.
+    dead port 1/2 on $mux $procmux$2899.
+    dead port 1/2 on $mux $procmux$2905.
+    dead port 1/2 on $mux $procmux$2908.
+    dead port 1/2 on $mux $procmux$2911.
+    dead port 1/2 on $mux $procmux$2914.
+    dead port 1/2 on $mux $procmux$2920.
+    dead port 1/2 on $mux $procmux$2923.
+    dead port 1/2 on $mux $procmux$2926.
+    dead port 1/2 on $mux $procmux$2929.
+    dead port 1/2 on $mux $procmux$2935.
+    dead port 1/2 on $mux $procmux$2938.
+    dead port 1/2 on $mux $procmux$2941.
+    dead port 1/2 on $mux $procmux$2947.
+    dead port 1/2 on $mux $procmux$2950.
+    dead port 1/2 on $mux $procmux$2953.
+    dead port 1/2 on $mux $procmux$2971.
+    dead port 1/2 on $mux $procmux$2974.
+    dead port 1/2 on $mux $procmux$2977.
+    dead port 1/2 on $mux $procmux$2983.
+    dead port 1/2 on $mux $procmux$2986.
+    dead port 1/2 on $mux $procmux$2989.
+    dead port 1/2 on $mux $procmux$2995.
+    dead port 1/2 on $mux $procmux$2998.
+    dead port 1/2 on $mux $procmux$3001.
+    dead port 1/2 on $mux $procmux$3007.
+    dead port 1/2 on $mux $procmux$3010.
+    dead port 1/2 on $mux $procmux$3013.
+    dead port 1/2 on $mux $procmux$3019.
+    dead port 1/2 on $mux $procmux$3022.
+    dead port 1/2 on $mux $procmux$3025.
+    dead port 1/2 on $mux $procmux$3031.
+    dead port 1/2 on $mux $procmux$3034.
+    dead port 1/2 on $mux $procmux$3037.
+    dead port 1/2 on $mux $procmux$3043.
+    dead port 1/2 on $mux $procmux$3046.
+    dead port 1/2 on $mux $procmux$3049.
+    dead port 1/2 on $mux $procmux$3055.
+    dead port 1/2 on $mux $procmux$3058.
+    dead port 1/2 on $mux $procmux$3061.
+    dead port 1/2 on $mux $procmux$3067.
+    dead port 1/2 on $mux $procmux$3070.
+    dead port 1/2 on $mux $procmux$3073.
+    dead port 1/2 on $mux $procmux$3079.
+    dead port 1/2 on $mux $procmux$3082.
+    dead port 1/2 on $mux $procmux$3085.
+    dead port 1/2 on $mux $procmux$3091.
+    dead port 1/2 on $mux $procmux$3094.
+    dead port 1/2 on $mux $procmux$3097.
+    dead port 1/2 on $mux $procmux$3103.
+    dead port 1/2 on $mux $procmux$3106.
+    dead port 1/2 on $mux $procmux$3109.
+    dead port 1/2 on $mux $procmux$3115.
+    dead port 1/2 on $mux $procmux$3118.
+    dead port 1/2 on $mux $procmux$3124.
+    dead port 1/2 on $mux $procmux$3127.
+    dead port 1/2 on $mux $procmux$3142.
+    dead port 1/2 on $mux $procmux$3145.
+    dead port 1/2 on $mux $procmux$3151.
+    dead port 1/2 on $mux $procmux$3154.
+    dead port 1/2 on $mux $procmux$3160.
+    dead port 1/2 on $mux $procmux$3163.
+    dead port 1/2 on $mux $procmux$3169.
+    dead port 1/2 on $mux $procmux$3172.
+    dead port 1/2 on $mux $procmux$3178.
+    dead port 1/2 on $mux $procmux$3181.
+    dead port 1/2 on $mux $procmux$3187.
+    dead port 1/2 on $mux $procmux$3190.
+    dead port 1/2 on $mux $procmux$3196.
+    dead port 1/2 on $mux $procmux$3199.
+    dead port 1/2 on $mux $procmux$3205.
+    dead port 1/2 on $mux $procmux$3208.
+    dead port 1/2 on $mux $procmux$3214.
+    dead port 1/2 on $mux $procmux$3217.
+    dead port 1/2 on $mux $procmux$3223.
+    dead port 1/2 on $mux $procmux$3226.
+    dead port 1/2 on $mux $procmux$3232.
+    dead port 1/2 on $mux $procmux$3235.
+    dead port 1/2 on $mux $procmux$3241.
+    dead port 1/2 on $mux $procmux$3244.
+    dead port 1/2 on $mux $procmux$3250.
+    dead port 1/2 on $mux $procmux$3256.
+    dead port 1/2 on $mux $procmux$3268.
+    dead port 1/2 on $mux $procmux$3274.
+    dead port 1/2 on $mux $procmux$3280.
+    dead port 1/2 on $mux $procmux$3286.
+    dead port 1/2 on $mux $procmux$3292.
+    dead port 1/2 on $mux $procmux$3298.
+    dead port 1/2 on $mux $procmux$3304.
+    dead port 1/2 on $mux $procmux$3310.
+    dead port 1/2 on $mux $procmux$3316.
+    dead port 1/2 on $mux $procmux$3322.
+    dead port 1/2 on $mux $procmux$3328.
+    dead port 2/2 on $mux $procmux$3346.
+    dead port 2/2 on $mux $procmux$3348.
+    dead port 2/2 on $mux $procmux$3367.
+    dead port 2/2 on $mux $procmux$3369.
+    dead port 2/2 on $mux $procmux$3384.
+    dead port 2/2 on $mux $procmux$3403.
+    dead port 2/2 on $mux $procmux$3412.
+    dead port 2/2 on $mux $procmux$3427.
+    dead port 2/2 on $mux $procmux$3440.
+    dead port 2/2 on $mux $procmux$3458.
+    dead port 2/2 on $mux $procmux$905.
+    dead port 1/2 on $mux $procmux$908.
+    dead port 1/2 on $mux $procmux$911.
+    dead port 1/2 on $mux $procmux$914.
+    dead port 1/2 on $mux $procmux$917.
+    dead port 1/2 on $mux $procmux$920.
+    dead port 1/2 on $mux $procmux$923.
+    dead port 1/2 on $mux $procmux$926.
+    dead port 1/2 on $mux $procmux$929.
+    dead port 1/2 on $mux $procmux$932.
+    dead port 2/2 on $mux $procmux$938.
+    dead port 1/2 on $mux $procmux$941.
+    dead port 1/2 on $mux $procmux$944.
+    dead port 1/2 on $mux $procmux$947.
+    dead port 1/2 on $mux $procmux$950.
+    dead port 1/2 on $mux $procmux$953.
+    dead port 1/2 on $mux $procmux$956.
+    dead port 1/2 on $mux $procmux$959.
+    dead port 1/2 on $mux $procmux$962.
+    dead port 1/2 on $mux $procmux$965.
+    dead port 2/2 on $mux $procmux$971.
+    dead port 1/2 on $mux $procmux$974.
+    dead port 1/2 on $mux $procmux$977.
+    dead port 1/2 on $mux $procmux$980.
+    dead port 1/2 on $mux $procmux$983.
+    dead port 1/2 on $mux $procmux$986.
+    dead port 1/2 on $mux $procmux$989.
+    dead port 1/2 on $mux $procmux$992.
+    dead port 1/2 on $mux $procmux$995.
+    dead port 1/2 on $mux $procmux$998.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$717.
+    dead port 2/2 on $mux $procmux$729.
+    dead port 2/2 on $mux $procmux$731.
+    dead port 2/2 on $mux $procmux$770.
+    dead port 2/2 on $mux $procmux$806.
+    dead port 2/2 on $mux $procmux$842.
+    dead port 2/2 on $mux $procmux$887.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$523.
+    dead port 1/2 on $mux $procmux$526.
+    dead port 1/2 on $mux $procmux$532.
+    dead port 1/2 on $mux $procmux$535.
+    dead port 1/2 on $mux $procmux$540.
+    dead port 1/2 on $mux $procmux$543.
+    dead port 1/2 on $mux $procmux$549.
+    dead port 1/2 on $mux $procmux$555.
+    dead port 1/2 on $mux $procmux$561.
+    dead port 1/2 on $mux $procmux$567.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$3523.
+    dead port 1/2 on $mux $procmux$3528.
+    dead port 1/2 on $mux $procmux$3533.
+    dead port 1/2 on $mux $procmux$3538.
+    dead port 1/2 on $mux $procmux$3543.
+    dead port 1/2 on $mux $procmux$3548.
+    dead port 1/2 on $mux $procmux$3553.
+    dead port 1/2 on $mux $procmux$3558.
+    dead port 1/2 on $mux $procmux$3563.
+    dead port 1/2 on $mux $procmux$3570.
+    dead port 2/2 on $mux $procmux$3572.
+    dead port 1/2 on $mux $procmux$3578.
+    dead port 2/2 on $mux $procmux$3580.
+    dead port 1/2 on $mux $procmux$3587.
+    dead port 2/2 on $mux $procmux$3589.
+    dead port 1/2 on $mux $procmux$3595.
+    dead port 2/2 on $mux $procmux$3597.
+    dead port 1/2 on $mux $procmux$3604.
+    dead port 2/2 on $mux $procmux$3606.
+    dead port 2/2 on $mux $procmux$3612.
+    dead port 2/2 on $mux $procmux$3618.
+    dead port 2/2 on $mux $procmux$3624.
+    dead port 2/2 on $mux $procmux$3630.
+    dead port 2/2 on $mux $procmux$3636.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$3670.
+    dead port 2/2 on $mux $procmux$3672.
+    dead port 1/2 on $mux $procmux$3679.
+    dead port 2/2 on $mux $procmux$3681.
+    dead port 1/2 on $mux $procmux$3688.
+    dead port 2/2 on $mux $procmux$3690.
+    dead port 2/2 on $mux $procmux$3696.
+    dead port 2/2 on $mux $procmux$3702.
+    dead port 2/2 on $mux $procmux$3708.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 663 multiplexer ports.
+<suppressed ~89 debug messages>
+
+7.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+    New ctrl vector for $mux cell $procmux$1465: { }
+    New ctrl vector for $mux cell $procmux$1600: { }
+    New ctrl vector for $mux cell $procmux$1834: { }
+    New ctrl vector for $mux cell $procmux$1492: { }
+    New ctrl vector for $mux cell $procmux$1858: { }
+    New ctrl vector for $pmux cell $procmux$3376: $auto$opt_reduce.cc:132:opt_mux$3851
+    New ctrl vector for $pmux cell $procmux$3388: { $procmux$3382_CMP $auto$opt_reduce.cc:132:opt_mux$3855 $auto$opt_reduce.cc:132:opt_mux$3853 }
+    New ctrl vector for $pmux cell $procmux$3419: { $auto$opt_reduce.cc:132:opt_mux$3859 $auto$opt_reduce.cc:132:opt_mux$3857 $procmux$3378_CMP $procmux$3377_CMP }
+    New ctrl vector for $mux cell $procmux$2185: { }
+    New ctrl vector for $mux cell $procmux$1708: { }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3856: { $procmux$3379_CMP $procmux$3382_CMP $procmux$3383_CMP }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3858: { $procmux$3347_CMP $procmux$3368_CMP }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3850: { $procmux$3347_CMP $procmux$3368_CMP $procmux$3377_CMP $procmux$3378_CMP $procmux$3379_CMP $procmux$3382_CMP $procmux$3383_CMP }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3852: { $procmux$3377_CMP $procmux$3378_CMP $procmux$3379_CMP $procmux$3389_CMP $procmux$3390_CMP $procmux$3391_CMP $procmux$3394_CMP $procmux$3395_CMP $procmux$3396_CMP $procmux$3397_CMP $procmux$3398_CMP }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3854: { $procmux$3347_CMP $procmux$3368_CMP }
+    New ctrl vector for $mux cell $procmux$2206: { }
+    New ctrl vector for $mux cell $procmux$1954: { }
+    New ctrl vector for $mux cell $procmux$2290: { }
+    New ctrl vector for $mux cell $procmux$2074: { }
+    New ctrl vector for $mux cell $procmux$2395: { }
+    New ctrl vector for $mux cell $procmux$2491: { }
+    New ctrl vector for $mux cell $procmux$2509: { }
+    New ctrl vector for $mux cell $procmux$2581: { }
+    New ctrl vector for $mux cell $procmux$2671: { }
+    New ctrl vector for $mux cell $procmux$2752: { }
+    New ctrl vector for $mux cell $procmux$2767: { }
+    New ctrl vector for $mux cell $procmux$2827: { }
+    New ctrl vector for $mux cell $procmux$2902: { }
+    New ctrl vector for $mux cell $procmux$2980: { }
+    New ctrl vector for $mux cell $procmux$3028: { }
+    New ctrl vector for $mux cell $procmux$3088: { }
+    New ctrl vector for $mux cell $procmux$3148: { }
+    New ctrl vector for $mux cell $procmux$3184: { }
+    New ctrl vector for $mux cell $procmux$3229: { }
+    New ctrl vector for $mux cell $procmux$2968: { }
+    New ctrl vector for $mux cell $procmux$3271: { }
+    New ctrl vector for $mux cell $procmux$3295: { }
+    New ctrl vector for $mux cell $procmux$3325: { }
+    New ctrl vector for $mux cell $procmux$3139: { }
+    New ctrl vector for $mux cell $procmux$3265: { }
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+    New ctrl vector for $pmux cell $procmux$740: { $procmux$749_CMP $auto$opt_reduce.cc:132:opt_mux$3863 $auto$opt_reduce.cc:132:opt_mux$3861 }
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3860: { $procmux$741_CMP $procmux$744_CMP $procmux$750_CMP $procmux$746_CMP $procmux$745_CMP $procmux$743_CMP $procmux$742_CMP }
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+    New ctrl vector for $mux cell $procmux$564: { }
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 43 changes.
+
+7.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 1 cells.
+
+7.6.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 0 unused cells and 746 unused wires.
+<suppressed ~5 debug messages>
+
+7.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~89 debug messages>
+
+7.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 0 changes.
+
+7.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.6.13. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.6.16. Finished OPT passes. (There is nothing left to do.)
+
+7.7. Executing WREDUCE pass (reducing word size of cells).
+Removed top 28 bits (of 32) from port Y of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/EX.v:155$288 ($add).
+Removed top 28 bits (of 32) from port A of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/EX.v:155$288 ($add).
+Removed top 28 bits (of 32) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/EX.v:155$288 ($add).
+Removed top 31 bits (of 32) from mux cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:154$286 ($mux).
+Removed top 29 bits (of 32) from mux cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:155$287 ($mux).
+Removed top 3 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:224$295 ($eq).
+Removed top 2 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:239$299 ($eq).
+Removed top 2 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:254$303 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:269$307 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:284$311 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:299$315 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/EX.v:314$319 ($eq).
+Removed top 31 bits (of 32) from mux cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:387$330 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1067 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1061 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1064 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1070 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1073 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1076 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1079 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1082 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1085 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1741 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1735 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1738 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1744 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1747 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1750 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1753 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1756 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$1759 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2104 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2098 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2101 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2107 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2110 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2113 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2116 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2119 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2422 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2416 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2419 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2425 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2428 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2431 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2434 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2689 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$2917 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3100 ($mux).
+Removed cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3238 ($mux).
+Removed top 2 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3347_CMP0 ($eq).
+Removed top 2 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3368_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3379_CMP0 ($eq).
+Removed top 3 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3382_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3396_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3397_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3398_CMP0 ($eq).
+Removed top 28 bits (of 32) from wire $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$0\i[31:0].
+Removed top 31 bits (of 32) from wire $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:154$286_Y.
+Removed top 29 bits (of 32) from wire $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:155$287_Y.
+Removed top 31 bits (of 32) from wire $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/EX.v:387$330_Y.
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$790_CMP0 ($eq).
+Removed top 4 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$730_CMP0 ($eq).
+Removed top 3 bits (of 4) from mux cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$727 ($mux).
+Removed top 1 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$750_CMP0 ($eq).
+Removed top 1 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$749_CMP0 ($eq).
+Removed top 3 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$748_CMP0 ($eq).
+Removed top 2 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$747_CMP0 ($eq).
+Removed top 5 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$746_CMP0 ($eq).
+Removed top 2 bits (of 10) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$742_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$446 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$448 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$450 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$452 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$454 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$456 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$458 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$460 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$462 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$464 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$466 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$468 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$470 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$472 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/ID.v:181$474 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$791_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$792_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$793_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$794_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$795_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$796_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$797_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$798_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$799_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$800_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$801_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$802_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$803_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$804_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$826_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$827_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$828_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$829_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$830_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$831_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$832_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$833_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$834_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$835_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$836_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$837_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$838_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$839_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$840_CMP0 ($eq).
+Removed top 3 bits (of 4) from wire $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.$3\o_op_w[3:0].
+Removed top 4 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$600_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$599_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$596_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$597_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$594_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$595_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$592_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$593_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$590_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$591_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$589_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$587_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/IF.v:60$513 ($eq).
+Removed top 29 bits (of 32) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/IF.v:74$516 ($add).
+Removed top 23 bits (of 32) from port Y of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/IF.v:74$516 ($add).
+Removed top 31 bits (of 32) from mux cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/IF.v:36$511 ($mux).
+Removed top 1 bits (of 5) from port B of cell $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/IF.v:71$515 ($eq).
+Removed top 23 bits (of 32) from wire $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$add$./codes/IF.v:74$516_Y.
+Removed top 31 bits (of 32) from wire $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/IF.v:36$511_Y.
+Removed top 1 bits (of 2) from port B of cell $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$eq$./codes/MEM.v:55$270 ($eq).
+Removed top 31 bits (of 32) from mux cell $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/MEM.v:97$273 ($mux).
+Removed top 1 bits (of 2) from port B of cell $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$procmux$3517_CMP0 ($eq).
+Removed top 31 bits (of 32) from wire $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.$ternary$./codes/MEM.v:97$273_Y.
+
+7.8. Executing PEEPOPT pass (run peephole optimizers).
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 0 unused cells and 38 unused wires.
+<suppressed ~4 debug messages>
+
+7.10. Executing TECHMAP pass (map to technology primitives).
+
+7.10.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/cmp2lut.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/cmp2lut.v' to AST representation.
+Generating RTLIL representation for module `\_90_lut_cmp_'.
+Successfully finished Verilog frontend.
+
+7.10.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~1056 debug messages>
+
+7.11. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64:
+  creating $macc model for $add$./codes/EX.v:155$288 ($add).
+  creating $macc model for $add$./codes/EX.v:226$297 ($add).
+  creating $macc model for $add$./codes/EX.v:226$298 ($add).
+  creating $macc model for $add$./codes/EX.v:240$301 ($add).
+  creating $macc model for $add$./codes/EX.v:240$302 ($add).
+  creating $macc model for $add$./codes/EX.v:255$305 ($add).
+  creating $macc model for $add$./codes/EX.v:255$306 ($add).
+  creating $macc model for $add$./codes/EX.v:270$309 ($add).
+  creating $macc model for $add$./codes/EX.v:270$310 ($add).
+  creating $macc model for $add$./codes/EX.v:285$313 ($add).
+  creating $macc model for $add$./codes/EX.v:285$314 ($add).
+  creating $macc model for $add$./codes/EX.v:300$317 ($add).
+  creating $macc model for $add$./codes/EX.v:300$318 ($add).
+  creating $macc model for $add$./codes/EX.v:315$321 ($add).
+  creating $macc model for $add$./codes/EX.v:315$322 ($add).
+  creating $macc model for $add$./codes/EX.v:330$325 ($add).
+  creating $macc model for $add$./codes/EX.v:330$326 ($add).
+  merging $macc model for $add$./codes/EX.v:330$325 into $add$./codes/EX.v:330$326.
+  merging $macc model for $add$./codes/EX.v:315$321 into $add$./codes/EX.v:315$322.
+  merging $macc model for $add$./codes/EX.v:300$317 into $add$./codes/EX.v:300$318.
+  merging $macc model for $add$./codes/EX.v:285$313 into $add$./codes/EX.v:285$314.
+  merging $macc model for $add$./codes/EX.v:270$309 into $add$./codes/EX.v:270$310.
+  merging $macc model for $add$./codes/EX.v:255$305 into $add$./codes/EX.v:255$306.
+  merging $macc model for $add$./codes/EX.v:240$301 into $add$./codes/EX.v:240$302.
+  merging $macc model for $add$./codes/EX.v:226$297 into $add$./codes/EX.v:226$298.
+  creating $alu model for $macc $add$./codes/EX.v:270$310.
+  creating $alu model for $macc $add$./codes/EX.v:285$314.
+  creating $alu model for $macc $add$./codes/EX.v:255$306.
+  creating $alu model for $macc $add$./codes/EX.v:315$322.
+  creating $alu model for $macc $add$./codes/EX.v:240$302.
+  creating $alu model for $macc $add$./codes/EX.v:300$318.
+  creating $alu model for $macc $add$./codes/EX.v:226$298.
+  creating $alu model for $macc $add$./codes/EX.v:330$326.
+  creating $alu model for $macc $add$./codes/EX.v:155$288.
+  creating $alu cell for $add$./codes/EX.v:155$288: $auto$alumacc.cc:474:replace_alu$3872
+  creating $alu cell for $add$./codes/EX.v:330$326: $auto$alumacc.cc:474:replace_alu$3875
+  creating $alu cell for $add$./codes/EX.v:226$298: $auto$alumacc.cc:474:replace_alu$3878
+  creating $alu cell for $add$./codes/EX.v:300$318: $auto$alumacc.cc:474:replace_alu$3881
+  creating $alu cell for $add$./codes/EX.v:240$302: $auto$alumacc.cc:474:replace_alu$3884
+  creating $alu cell for $add$./codes/EX.v:315$322: $auto$alumacc.cc:474:replace_alu$3887
+  creating $alu cell for $add$./codes/EX.v:255$306: $auto$alumacc.cc:474:replace_alu$3890
+  creating $alu cell for $add$./codes/EX.v:285$314: $auto$alumacc.cc:474:replace_alu$3893
+  creating $alu cell for $add$./codes/EX.v:270$310: $auto$alumacc.cc:474:replace_alu$3896
+  created 9 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64:
+  creating $macc model for $add$./codes/IF.v:74$516 ($add).
+  creating $alu model for $macc $add$./codes/IF.v:74$516.
+  creating $alu cell for $add$./codes/IF.v:74$516: $auto$alumacc.cc:474:replace_alu$3899
+  created 1 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module cpu:
+  created 0 $alu and 0 $macc cells.
+
+7.12. Executing SHARE pass (SAT-based resource sharing).
+
+7.13. Executing OPT pass (performing simple optimizations).
+
+7.13.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.13.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~74 debug messages>
+
+7.13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 0 changes.
+
+7.13.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.13.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 8 unused cells and 8 unused wires.
+<suppressed ~9 debug messages>
+
+7.13.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.13.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.13.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~74 debug messages>
+
+7.13.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 0 changes.
+
+7.13.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.13.13. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.13.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.13.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.13.16. Finished OPT passes. (There is nothing left to do.)
+
+7.14. Executing FSM pass (extract and optimize FSM).
+
+7.14.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.cs.
+Not marking $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.o_type_r as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+Not marking $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.o_op_r as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+Found FSM state register $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.cs.
+Found FSM state register $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.cs.
+
+7.14.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\cs' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+  found $adff cell for state register: $procdff$3823
+  root of input selection tree: \ns
+  found reset state: 4'0000 (from async reset)
+  found ctrl input: $eq$./codes/EX.v:329$323_Y
+  found ctrl input: $eq$./codes/EX.v:314$319_Y
+  found ctrl input: $eq$./codes/EX.v:299$315_Y
+  found ctrl input: $eq$./codes/EX.v:284$311_Y
+  found ctrl input: $eq$./codes/EX.v:269$307_Y
+  found ctrl input: $eq$./codes/EX.v:254$303_Y
+  found ctrl input: $eq$./codes/EX.v:239$299_Y
+  found ctrl input: $eq$./codes/EX.v:224$295_Y
+  found ctrl input: $eq$./codes/EX.v:68$277_Y
+  found state code: 4'1001
+  found state code: 4'1000
+  found state code: 4'0111
+  found state code: 4'0110
+  found state code: 4'0101
+  found state code: 4'0100
+  found state code: 4'0011
+  found state code: 4'0010
+  found ctrl input: \i_id_valid
+  found state code: 4'0001
+  found ctrl output: $eq$./codes/EX.v:68$277_Y
+  found ctrl output: $eq$./codes/EX.v:224$295_Y
+  found ctrl output: $eq$./codes/EX.v:239$299_Y
+  found ctrl output: $eq$./codes/EX.v:254$303_Y
+  found ctrl output: $eq$./codes/EX.v:269$307_Y
+  found ctrl output: $eq$./codes/EX.v:284$311_Y
+  found ctrl output: $eq$./codes/EX.v:299$315_Y
+  found ctrl output: $eq$./codes/EX.v:314$319_Y
+  found ctrl output: $eq$./codes/EX.v:329$323_Y
+  found ctrl output: $eq$./codes/EX.v:343$327_Y
+  ctrl inputs: \i_id_valid
+  ctrl outputs: { $eq$./codes/EX.v:343$327_Y $eq$./codes/EX.v:329$323_Y $eq$./codes/EX.v:314$319_Y $eq$./codes/EX.v:299$315_Y $eq$./codes/EX.v:284$311_Y $eq$./codes/EX.v:269$307_Y $eq$./codes/EX.v:254$303_Y $eq$./codes/EX.v:239$299_Y $eq$./codes/EX.v:224$295_Y $eq$./codes/EX.v:68$277_Y \ns }
+  transition:     4'0000 1'0 ->     4'0000 14'00000000010000
+  transition:     4'0000 1'1 ->     4'0001 14'00000000010001
+  transition:     4'1000 1'- ->     4'1001 14'01000000001001
+  transition:     4'0100 1'- ->     4'0101 14'00000100000101
+  transition:     4'0010 1'- ->     4'0011 14'00000001000011
+  transition:     4'0110 1'- ->     4'0111 14'00010000000111
+  transition:     4'0001 1'- ->     4'0010 14'00000000100010
+  transition:     4'1001 1'- ->     4'0000 14'10000000000000
+  transition:     4'0101 1'- ->     4'0110 14'00001000000110
+  transition:     4'0011 1'- ->     4'0100 14'00000010000100
+  transition:     4'0111 1'- ->     4'1000 14'00100000001000
+Extracting FSM `\cs' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+  found $adff cell for state register: $procdff$3782
+  root of input selection tree: \ns
+  found reset state: 5'00000 (from async reset)
+  found ctrl input: $procmux$587_CMP
+  found ctrl input: $eq$./codes/IF.v:71$515_Y
+  found ctrl input: $procmux$589_CMP
+  found ctrl input: $procmux$590_CMP
+  found ctrl input: $procmux$591_CMP
+  found ctrl input: $procmux$592_CMP
+  found ctrl input: $procmux$593_CMP
+  found ctrl input: $procmux$594_CMP
+  found ctrl input: $procmux$595_CMP
+  found ctrl input: $procmux$596_CMP
+  found ctrl input: $procmux$597_CMP
+  found ctrl input: $eq$./codes/IF.v:60$513_Y
+  found ctrl input: $procmux$599_CMP
+  found ctrl input: $procmux$600_CMP
+  found ctrl input: $eq$./codes/IF.v:67$514_Y
+  found state code: 5'01111
+  found state code: 5'01110
+  found state code: 5'01101
+  found state code: 5'01100
+  found state code: 5'01011
+  found state code: 5'01010
+  found state code: 5'01001
+  found state code: 5'01000
+  found state code: 5'00111
+  found state code: 5'00110
+  found state code: 5'00101
+  found state code: 5'00100
+  found state code: 5'00011
+  found state code: 5'00010
+  found ctrl input: \o_i_valid_addr_r
+  found state code: 5'00001
+  found ctrl output: $procmux$600_CMP
+  found ctrl output: $procmux$599_CMP
+  found ctrl output: $procmux$596_CMP
+  found ctrl output: $procmux$597_CMP
+  found ctrl output: $procmux$594_CMP
+  found ctrl output: $procmux$595_CMP
+  found ctrl output: $procmux$592_CMP
+  found ctrl output: $procmux$593_CMP
+  found ctrl output: $procmux$590_CMP
+  found ctrl output: $procmux$591_CMP
+  found ctrl output: $procmux$589_CMP
+  found ctrl output: $procmux$587_CMP
+  found ctrl output: $eq$./codes/IF.v:60$513_Y
+  found ctrl output: $eq$./codes/IF.v:67$514_Y
+  found ctrl output: $eq$./codes/IF.v:71$515_Y
+  ctrl inputs: \o_i_valid_addr_r
+  ctrl outputs: { $eq$./codes/IF.v:71$515_Y $eq$./codes/IF.v:60$513_Y $eq$./codes/IF.v:67$514_Y $procmux$587_CMP $procmux$589_CMP $procmux$590_CMP $procmux$591_CMP $procmux$592_CMP $procmux$593_CMP $procmux$594_CMP $procmux$595_CMP $procmux$596_CMP $procmux$597_CMP $procmux$599_CMP $procmux$600_CMP \ns }
+  transition:    5'00000 1'0 ->    5'00000 20'00100000000000000000
+  transition:    5'00000 1'1 ->    5'00001 20'00100000000000000001
+  transition:    5'01000 1'- ->    5'01001 20'00000000100000001001
+  transition:    5'00100 1'- ->    5'00101 20'00000000000010000101
+  transition:    5'01100 1'- ->    5'01101 20'00001000000000001101
+  transition:    5'00010 1'- ->    5'00011 20'00000000000001000011
+  transition:    5'01010 1'- ->    5'01011 20'00000010000000001011
+  transition:    5'00110 1'- ->    5'00111 20'00000000001000000111
+  transition:    5'01110 1'- ->    5'01111 20'00010000000000001111
+  transition:    5'00001 1'- ->    5'00010 20'00000000000000100010
+  transition:    5'01001 1'- ->    5'01010 20'00000001000000001010
+  transition:    5'00101 1'- ->    5'00110 20'00000000000100000110
+  transition:    5'01101 1'- ->    5'01110 20'10000000000000001110
+  transition:    5'00011 1'- ->    5'00100 20'01000000000000000100
+  transition:    5'01011 1'- ->    5'01100 20'00000100000000001100
+  transition:    5'00111 1'- ->    5'01000 20'00000000010000001000
+  transition:    5'01111 1'- ->    5'00000 20'00000000000000000000
+Extracting FSM `\cs' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+  found $adff cell for state register: $procdff$3838
+  root of input selection tree: \ns
+  found reset state: 2'00 (from async reset)
+  found ctrl input: $procmux$3517_CMP
+  found ctrl input: $eq$./codes/MEM.v:48$267_Y
+  found state code: 2'10
+  found ctrl input: \i_valid
+  found state code: 2'01
+  found ctrl output: $eq$./codes/MEM.v:48$267_Y
+  found ctrl output: $eq$./codes/MEM.v:72$271_Y
+  found ctrl output: $procmux$3517_CMP
+  ctrl inputs: \i_valid
+  ctrl outputs: { $procmux$3517_CMP $eq$./codes/MEM.v:72$271_Y $eq$./codes/MEM.v:48$267_Y \ns }
+  transition:       2'00 1'0 ->       2'00 5'00100
+  transition:       2'00 1'1 ->       2'01 5'00101
+  transition:       2'10 1'- ->       2'00 5'01000
+  transition:       2'01 1'- ->       2'10 5'10010
+
+7.14.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\cs$3902' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Optimizing FSM `$fsm$\cs$3914' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Optimizing FSM `$fsm$\cs$3931' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.14.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 37 unused cells and 37 unused wires.
+<suppressed ~40 debug messages>
+
+7.14.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\cs$3902' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+  Removing unused output signal \ns [0].
+  Removing unused output signal \ns [1].
+  Removing unused output signal \ns [2].
+  Removing unused output signal \ns [3].
+Optimizing FSM `$fsm$\cs$3914' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+  Removing unused output signal \ns [0].
+  Removing unused output signal \ns [1].
+  Removing unused output signal \ns [2].
+  Removing unused output signal \ns [3].
+  Removing unused output signal \ns [4].
+  Removing unused output signal $procmux$600_CMP.
+  Removing unused output signal $procmux$599_CMP.
+  Removing unused output signal $procmux$597_CMP.
+  Removing unused output signal $procmux$596_CMP.
+  Removing unused output signal $procmux$595_CMP.
+  Removing unused output signal $procmux$594_CMP.
+  Removing unused output signal $procmux$593_CMP.
+  Removing unused output signal $procmux$592_CMP.
+  Removing unused output signal $procmux$591_CMP.
+  Removing unused output signal $procmux$590_CMP.
+  Removing unused output signal $procmux$589_CMP.
+  Removing unused output signal $procmux$587_CMP.
+Optimizing FSM `$fsm$\cs$3931' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+  Removing unused output signal \ns [0].
+  Removing unused output signal \ns [1].
+  Removing unused output signal $procmux$3517_CMP.
+
+7.14.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\cs$3902' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  0000 -> ---------1
+  1000 -> --------1-
+  0100 -> -------1--
+  0010 -> ------1---
+  0110 -> -----1----
+  0001 -> ----1-----
+  1001 -> ---1------
+  0101 -> --1-------
+  0011 -> -1--------
+  0111 -> 1---------
+Recoding FSM `$fsm$\cs$3914' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00000 -> ---------------1
+  01000 -> --------------1-
+  00100 -> -------------1--
+  01100 -> ------------1---
+  00010 -> -----------1----
+  01010 -> ----------1-----
+  00110 -> ---------1------
+  01110 -> --------1-------
+  00001 -> -------1--------
+  01001 -> ------1---------
+  00101 -> -----1----------
+  01101 -> ----1-----------
+  00011 -> ---1------------
+  01011 -> --1-------------
+  00111 -> -1--------------
+  01111 -> 1---------------
+Recoding FSM `$fsm$\cs$3931' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+
+7.14.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\cs$3902' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64':
+-------------------------------------
+
+  Information on FSM $fsm$\cs$3902 (\cs):
+
+  Number of input signals:    1
+  Number of output signals:  10
+  Number of state bits:      10
+
+  Input signals:
+    0: \i_id_valid
+
+  Output signals:
+    0: $eq$./codes/EX.v:68$277_Y
+    1: $eq$./codes/EX.v:224$295_Y
+    2: $eq$./codes/EX.v:239$299_Y
+    3: $eq$./codes/EX.v:254$303_Y
+    4: $eq$./codes/EX.v:269$307_Y
+    5: $eq$./codes/EX.v:284$311_Y
+    6: $eq$./codes/EX.v:299$315_Y
+    7: $eq$./codes/EX.v:314$319_Y
+    8: $eq$./codes/EX.v:329$323_Y
+    9: $eq$./codes/EX.v:343$327_Y
+
+  State encoding:
+    0: 10'---------1  <RESET STATE>
+    1: 10'--------1-
+    2: 10'-------1--
+    3: 10'------1---
+    4: 10'-----1----
+    5: 10'----1-----
+    6: 10'---1------
+    7: 10'--1-------
+    8: 10'-1--------
+    9: 10'1---------
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 1'0   ->     0 10'0000000001
+      1:     0 1'1   ->     5 10'0000000001
+      2:     1 1'-   ->     6 10'0100000000
+      3:     2 1'-   ->     7 10'0000010000
+      4:     3 1'-   ->     8 10'0000000100
+      5:     4 1'-   ->     9 10'0001000000
+      6:     5 1'-   ->     3 10'0000000010
+      7:     6 1'-   ->     0 10'1000000000
+      8:     7 1'-   ->     4 10'0000100000
+      9:     8 1'-   ->     2 10'0000001000
+     10:     9 1'-   ->     1 10'0010000000
+
+-------------------------------------
+
+FSM `$fsm$\cs$3914' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64':
+-------------------------------------
+
+  Information on FSM $fsm$\cs$3914 (\cs):
+
+  Number of input signals:    1
+  Number of output signals:   3
+  Number of state bits:      16
+
+  Input signals:
+    0: \o_i_valid_addr_r
+
+  Output signals:
+    0: $eq$./codes/IF.v:67$514_Y
+    1: $eq$./codes/IF.v:60$513_Y
+    2: $eq$./codes/IF.v:71$515_Y
+
+  State encoding:
+    0: 16'---------------1  <RESET STATE>
+    1: 16'--------------1-
+    2: 16'-------------1--
+    3: 16'------------1---
+    4: 16'-----------1----
+    5: 16'----------1-----
+    6: 16'---------1------
+    7: 16'--------1-------
+    8: 16'-------1--------
+    9: 16'------1---------
+   10: 16'-----1----------
+   11: 16'----1-----------
+   12: 16'---1------------
+   13: 16'--1-------------
+   14: 16'-1--------------
+   15: 16'1---------------
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 1'0   ->     0 3'001
+      1:     0 1'1   ->     8 3'001
+      2:     1 1'-   ->     9 3'000
+      3:     2 1'-   ->    10 3'000
+      4:     3 1'-   ->    11 3'000
+      5:     4 1'-   ->    12 3'000
+      6:     5 1'-   ->    13 3'000
+      7:     6 1'-   ->    14 3'000
+      8:     7 1'-   ->    15 3'000
+      9:     8 1'-   ->     4 3'000
+     10:     9 1'-   ->     5 3'000
+     11:    10 1'-   ->     6 3'000
+     12:    11 1'-   ->     7 3'100
+     13:    12 1'-   ->     2 3'010
+     14:    13 1'-   ->     3 3'000
+     15:    14 1'-   ->     1 3'000
+     16:    15 1'-   ->     0 3'000
+
+-------------------------------------
+
+FSM `$fsm$\cs$3931' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64':
+-------------------------------------
+
+  Information on FSM $fsm$\cs$3931 (\cs):
+
+  Number of input signals:    1
+  Number of output signals:   2
+  Number of state bits:       3
+
+  Input signals:
+    0: \i_valid
+
+  Output signals:
+    0: $eq$./codes/MEM.v:48$267_Y
+    1: $eq$./codes/MEM.v:72$271_Y
+
+  State encoding:
+    0:      3'--1  <RESET STATE>
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 1'0   ->     0 2'01
+      1:     0 1'1   ->     2 2'01
+      2:     1 1'-   ->     0 2'10
+      3:     2 1'-   ->     1 2'00
+
+-------------------------------------
+
+7.14.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\cs$3902' from module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Mapping FSM `$fsm$\cs$3914' from module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Mapping FSM `$fsm$\cs$3931' from module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+
+7.15. Executing OPT pass (performing simple optimizations).
+
+7.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.15.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.15.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 0 unused cells and 40 unused wires.
+<suppressed ~6 debug messages>
+
+7.15.5. Finished fast OPT passes.
+
+7.16. Executing MEMORY pass.
+
+7.16.1. Executing MEMORY_DFF pass (merging $dff cells to $memrd and $memwr).
+
+7.16.2. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.16.3. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.16.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.16.5. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.18. Executing OPT pass (performing simple optimizations).
+
+7.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~6 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~7 debug messages>
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~2 debug messages>
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~5 debug messages>
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~3 debug messages>
+Optimizing module cpu.
+
+7.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.18.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 2 unused cells and 12 unused wires.
+<suppressed ~6 debug messages>
+
+7.18.5. Finished fast OPT passes.
+
+7.19. Executing MEMORY_MAP pass (converting $mem cells to logic and flip-flops).
+
+7.20. Executing OPT pass (performing simple optimizations).
+
+7.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~64 debug messages>
+
+7.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:126:opt_mux$3850: { $2\carry_w[0:0] $procmux$3347_CMP $procmux$3368_CMP $procmux$3378_CMP $procmux$3379_CMP $procmux$3382_CMP $procmux$3383_CMP }
+    Consolidated identical input bits for $mux cell $procmux$3344:
+      Old ports: A=64'0000000000000000000000000000000000000000000000000000000000000100, B={ \i_imm [62:0] 1'0 }, Y=$4\tmp_w[63:0]
+      New ports: A=63'000000000000000000000000000000000000000000000000000000000000010, B=\i_imm [62:0], Y=$4\tmp_w[63:0] [63:1]
+      New connections: $4\tmp_w[63:0] [0] = 1'0
+    Consolidated identical input bits for $mux cell $procmux$3365:
+      Old ports: A=64'0000000000000000000000000000000000000000000000000000000000000100, B={ \i_imm [62:0] 1'0 }, Y=$3\tmp_w[63:0]
+      New ports: A=63'000000000000000000000000000000000000000000000000000000000000010, B=\i_imm [62:0], Y=$3\tmp_w[63:0] [63:1]
+      New connections: $3\tmp_w[63:0] [0] = 1'0
+    Consolidated identical input bits for $mux cell $ternary$./codes/EX.v:155$287:
+      Old ports: A=3'000, B=3'100, Y=$auto$wreduce.cc:455:run$3866 [2:0]
+      New ports: A=1'0, B=1'1, Y=$auto$wreduce.cc:455:run$3866 [2]
+      New connections: $auto$wreduce.cc:455:run$3866 [1:0] = 2'00
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+    Consolidated identical input bits for $mux cell $procmux$851:
+      Old ports: A=64'0000000000000000000000000000000000000000000000000000000000000000, B={ $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] [11] $0\tmp_imm[11:0] }, Y=\o_imm_w
+      New ports: A=12'000000000000, B=$0\tmp_imm[11:0], Y=\o_imm_w [11:0]
+      New connections: \o_imm_w [63:12] = { \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] \o_imm_w [11] }
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 5 changes.
+
+7.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.20.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.20.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+
+7.20.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~1 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.20.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.20.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \cpu..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~63 debug messages>
+
+7.20.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+  Optimizing cells in module \cpu.
+Performed a total of 0 changes.
+
+7.20.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 0 cells.
+
+7.20.13. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.20.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+7.20.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.20.16. Finished OPT passes. (There is nothing left to do.)
+
+7.21. Executing TECHMAP pass (map to technology primitives).
+
+7.21.1. Executing Verilog-2005 frontend: <techmap.v>
+Parsing Verilog input from `<techmap.v>' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+7.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=8\B_WIDTH=8\Y_WIDTH=9 for cells of type $alu.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_alu\A_SIGNED=1\B_SIGNED=1\A_WIDTH=4\B_WIDTH=4\Y_WIDTH=4 for cells of type $alu.
+Using template $paramod$constmap:4390dd637e091d3ac3a28f04c5fc1a90a4738f00$paramod$ea1406ee8a0fa5db1003a5e0e396b0e8232d789a\_90_shift_ops_shr_shl_sshl_sshr for cells of type $shl.
+Using template $paramod\_90_pmux\WIDTH=2\S_WIDTH=3 for cells of type $pmux.
+Using template $paramod\_90_pmux\WIDTH=64\S_WIDTH=4 for cells of type $pmux.
+Using template $paramod\_90_pmux\WIDTH=64\S_WIDTH=8 for cells of type $pmux.
+Using template $paramod\_90_pmux\WIDTH=64\S_WIDTH=2 for cells of type $pmux.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=9 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=4 for cells of type $lcu.
+Using template $paramod\_90_pmux\WIDTH=64\S_WIDTH=31 for cells of type $pmux.
+Using template $paramod\_90_pmux\WIDTH=4\S_WIDTH=13 for cells of type $pmux.
+Using template $paramod\_90_pmux\WIDTH=12\S_WIDTH=3 for cells of type $pmux.
+Using template $paramod\_90_alu\A_SIGNED=0\B_SIGNED=0\A_WIDTH=3\B_WIDTH=9\Y_WIDTH=9 for cells of type $alu.
+No more expansions possible.
+<suppressed ~2013 debug messages>
+
+7.22. Executing OPT pass (performing simple optimizations).
+
+7.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~456 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~377 debug messages>
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~50 debug messages>
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~322 debug messages>
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~138 debug messages>
+Optimizing module cpu.
+
+7.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~750 debug messages>
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~1950 debug messages>
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 902 cells.
+
+7.22.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 78 unused cells and 1856 unused wires.
+<suppressed ~83 debug messages>
+
+7.22.5. Finished fast OPT passes.
+
+7.23. Executing ABC pass (technology mapping using ABC).
+
+7.23.1. Extracting gate netlist of module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64' to `<abc-temp-dir>/input.blif'..
+Extracted 5599 gates and 6211 wires to a netlist network with 610 inputs and 338 outputs.
+
+7.23.1.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 17 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + retime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.23.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      170
+ABC RESULTS:            ANDNOT cells:      254
+ABC RESULTS:              AOI3 cells:      174
+ABC RESULTS:              AOI4 cells:      191
+ABC RESULTS:               MUX cells:     2717
+ABC RESULTS:              NAND cells:      119
+ABC RESULTS:               NOR cells:       94
+ABC RESULTS:               NOT cells:      110
+ABC RESULTS:              OAI3 cells:       36
+ABC RESULTS:              OAI4 cells:      190
+ABC RESULTS:                OR cells:      136
+ABC RESULTS:             ORNOT cells:       76
+ABC RESULTS:              XNOR cells:      189
+ABC RESULTS:               XOR cells:       67
+ABC RESULTS:        internal signals:     5263
+ABC RESULTS:           input signals:      610
+ABC RESULTS:          output signals:      338
+Removing temp directory.
+
+7.23.2. Extracting gate netlist of module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64' to `<abc-temp-dir>/input.blif'..
+Extracted 10692 gates and 12845 wires to a netlist network with 2151 inputs and 2199 outputs.
+
+7.23.2.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 17 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + retime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.23.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        5
+ABC RESULTS:            ANDNOT cells:       76
+ABC RESULTS:              AOI3 cells:      162
+ABC RESULTS:              AOI4 cells:      128
+ABC RESULTS:               MUX cells:     2048
+ABC RESULTS:              NAND cells:       14
+ABC RESULTS:               NOR cells:       14
+ABC RESULTS:               NOT cells:     1940
+ABC RESULTS:              OAI3 cells:      257
+ABC RESULTS:              OAI4 cells:     1819
+ABC RESULTS:                OR cells:     2001
+ABC RESULTS:             ORNOT cells:       22
+ABC RESULTS:        internal signals:     8495
+ABC RESULTS:           input signals:     2151
+ABC RESULTS:          output signals:     2199
+Removing temp directory.
+
+7.23.3. Extracting gate netlist of module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64' to `<abc-temp-dir>/input.blif'..
+Extracted 467 gates and 603 wires to a netlist network with 134 inputs and 194 outputs.
+
+7.23.3.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 17 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + retime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.23.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       67
+ABC RESULTS:            ANDNOT cells:       67
+ABC RESULTS:               MUX cells:      256
+ABC RESULTS:              NAND cells:       66
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        5
+ABC RESULTS:        internal signals:      275
+ABC RESULTS:           input signals:      134
+ABC RESULTS:          output signals:      194
+Removing temp directory.
+
+7.23.4. Extracting gate netlist of module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64' to `<abc-temp-dir>/input.blif'..
+Extracted 596 gates and 999 wires to a netlist network with 401 inputs and 268 outputs.
+
+7.23.4.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 17 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + retime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.23.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        1
+ABC RESULTS:            ANDNOT cells:      196
+ABC RESULTS:               MUX cells:      263
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:      130
+ABC RESULTS:        internal signals:      330
+ABC RESULTS:           input signals:      401
+ABC RESULTS:          output signals:      268
+Removing temp directory.
+
+7.23.5. Extracting gate netlist of module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64' to `<abc-temp-dir>/input.blif'..
+Extracted 216 gates and 355 wires to a netlist network with 137 inputs and 70 outputs.
+
+7.23.5.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 17 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + retime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.23.5.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        1
+ABC RESULTS:            ANDNOT cells:      135
+ABC RESULTS:               MUX cells:       64
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:              OAI3 cells:        5
+ABC RESULTS:        internal signals:      148
+ABC RESULTS:           input signals:      137
+ABC RESULTS:          output signals:       70
+Removing temp directory.
+
+7.23.6. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+7.24. Executing OPT pass (performing simple optimizations).
+
+7.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~395 debug messages>
+Optimizing module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~6 debug messages>
+Optimizing module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~192 debug messages>
+Optimizing module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Optimizing module cpu.
+
+7.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `$paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64'.
+Finding identical cells in module `\cpu'.
+Removed a total of 1 cells.
+
+7.24.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+7.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+Finding unused cells or wires in module \cpu..
+Removed 9 unused cells and 8022 unused wires.
+<suppressed ~14 debug messages>
+
+7.24.5. Finished fast OPT passes.
+
+7.25. Executing HIERARCHY pass (managing design hierarchy).
+
+7.25.1. Analyzing design hierarchy..
+Top module:  \cpu
+Used module:     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64
+
+7.25.2. Analyzing design hierarchy..
+Top module:  \cpu
+Used module:     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64
+Used module:     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64
+Removed 0 unused modules.
+
+7.26. Printing statistics.
+
+=== $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64 ===
+
+   Number of wires:               4221
+   Number of wire bits:           5331
+   Number of public wires:          42
+   Number of public wire bits:    1152
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4861
+     $_ANDNOT_                     254
+     $_AND_                        170
+     $_AOI3_                       174
+     $_AOI4_                       191
+     $_DFF_PN0_                    345
+     $_DFF_PN1_                      1
+     $_MUX_                       2717
+     $_NAND_                       119
+     $_NOR_                         94
+     $_NOT_                        102
+     $_OAI3_                        36
+     $_OAI4_                       190
+     $_ORNOT_                       76
+     $_OR_                         136
+     $_XNOR_                       189
+     $_XOR_                         67
+
+=== $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64 ===
+
+   Number of wires:               6380
+   Number of wire bits:          11129
+   Number of public wires:          93
+   Number of public wire bits:    4842
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              10685
+     $_ANDNOT_                      76
+     $_AND_                          5
+     $_AOI3_                       162
+     $_AOI4_                       128
+     $_DFF_PN0_                   2199
+     $_MUX_                       2048
+     $_NAND_                        14
+     $_NOR_                         14
+     $_NOT_                       1940
+     $_OAI3_                       257
+     $_OAI4_                      1819
+     $_ORNOT_                       22
+     $_OR_                        2001
+
+=== $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64 ===
+
+   Number of wires:                294
+   Number of wire bits:            876
+   Number of public wires:          19
+   Number of public wire bits:     601
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                676
+     $_ANDNOT_                      67
+     $_AND_                         67
+     $_DFF_PN0_                    208
+     $_DFF_PN1_                      1
+     $_MUX_                        256
+     $_NAND_                        66
+     $_NOT_                          2
+     $_ORNOT_                        1
+     $_OR_                           2
+     $_XNOR_                         1
+     $_XOR_                          5
+
+=== $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64 ===
+
+   Number of wires:                360
+   Number of wire bits:           1264
+   Number of public wires:          35
+   Number of public wire bits:     939
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                860
+     $_ANDNOT_                     196
+     $_AND_                          1
+     $_DFF_PN0_                    268
+     $_DFF_PN1_                      1
+     $_MUX_                        263
+     $_ORNOT_                      129
+     $_OR_                           2
+
+=== $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64 ===
+
+   Number of wires:                156
+   Number of wire bits:            488
+   Number of public wires:          17
+   Number of public wire bits:     349
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                279
+     $_ANDNOT_                     135
+     $_AND_                          1
+     $_DFF_PN0_                     70
+     $_MUX_                         64
+     $_NAND_                         1
+     $_NOR_                          2
+     $_NOT_                          1
+     $_OAI3_                         5
+
+=== cpu ===
+
+   Number of wires:                 36
+   Number of wire bits:            970
+   Number of public wires:          36
+   Number of public wire bits:     970
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64      1
+
+=== design hierarchy ===
+
+   cpu                               1
+     $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64      1
+     $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64      1
+
+   Number of wires:              11447
+   Number of wire bits:          20058
+   Number of public wires:         242
+   Number of public wire bits:    8853
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              17361
+     $_ANDNOT_                     728
+     $_AND_                        244
+     $_AOI3_                       336
+     $_AOI4_                       319
+     $_DFF_PN0_                   3090
+     $_DFF_PN1_                      3
+     $_MUX_                       5348
+     $_NAND_                       200
+     $_NOR_                        110
+     $_NOT_                       2045
+     $_OAI3_                       298
+     $_OAI4_                      2009
+     $_ORNOT_                      228
+     $_OR_                        2141
+     $_XNOR_                       190
+     $_XOR_                         72
+
+7.27. Executing CHECK pass (checking for obvious problems).
+checking module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64..
+checking module cpu..
+found and reported 0 problems.
+
+8. Executing FLATTEN pass (flatten design).
+Using template $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64 for cells of type $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Using template $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64 for cells of type $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+Using template $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64 for cells of type $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Using template $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64 for cells of type $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Using template $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64 for cells of type $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+<suppressed ~5 debug messages>
+No more expansions possible.
+Deleting now unused module $paramod\EX\ADDR_W=64\INST_W=32\DATA_W=64.
+Deleting now unused module $paramod\ID\ADDR_W=64\INST_W=32\DATA_W=64.
+Deleting now unused module $paramod\IF\ADDR_W=64\INST_W=32\DATA_W=64.
+Deleting now unused module $paramod\MEM\ADDR_W=64\INST_W=32\DATA_W=64.
+Deleting now unused module $paramod\WB\ADDR_W=64\INST_W=32\DATA_W=64.
+
+9. Executing Verilog backend.
+Dumping module `\cpu'.
+
+10. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF_X1 (noninv, pins=4, area=4.52) is a direct match for cell type $_DFF_P_.
+  cell DFFR_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN0_.
+  cell DFFS_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN1_.
+  cell DFFRS_X1 (noninv, pins=6, area=6.38) is a direct match for cell type $_DFFSR_PNN_.
+  create mapping for $_DFF_PP0_ from mapping for $_DFF_PN0_.
+  create mapping for $_DFF_PP1_ from mapping for $_DFF_PN1_.
+  create mapping for $_DFFSR_PPN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PNP_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PPP_ from mapping for $_DFFSR_PNP_.
+  create mapping for $_DFF_N_ from mapping for $_DFF_P_.
+  create mapping for $_DFF_NN0_ from mapping for $_DFF_PN0_.
+  create mapping for $_DFF_NP0_ from mapping for $_DFF_NN0_.
+  create mapping for $_DFF_NN1_ from mapping for $_DFF_NN0_.
+  create mapping for $_DFF_NP1_ from mapping for $_DFF_NN1_.
+  create mapping for $_DFFSR_NNN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_NPN_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NNP_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NPP_ from mapping for $_DFFSR_NNP_.
+  final dff cell mappings:
+    DFF_X1 _DFF_N_ (.CK(~C), .D( D), .Q( Q), .QN(~Q));
+    DFF_X1 _DFF_P_ (.CK( C), .D( D), .Q( Q), .QN(~Q));
+    DFFR_X1 _DFF_NN0_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    DFFR_X1 _DFF_NN1_ (.CK(~C), .D(~D), .Q(~Q), .QN( Q), .RN( R));
+    DFFR_X1 _DFF_NP0_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN(~R));
+    DFFR_X1 _DFF_NP1_ (.CK(~C), .D(~D), .Q(~Q), .QN( Q), .RN(~R));
+    DFFR_X1 _DFF_PN0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    DFFS_X1 _DFF_PN1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN( R));
+    DFFR_X1 _DFF_PP0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN(~R));
+    DFFS_X1 _DFF_PP1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN(~R));
+    DFFRS_X1 _DFFSR_NNN_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    DFFRS_X1 _DFFSR_NNP_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN(~R), .SN( S));
+    DFFRS_X1 _DFFSR_NPN_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN(~S));
+    DFFRS_X1 _DFFSR_NPP_ (.CK(~C), .D( D), .Q( Q), .QN(~Q), .RN(~R), .SN(~S));
+    DFFRS_X1 _DFFSR_PNN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    DFFRS_X1 _DFFSR_PNP_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN(~R), .SN( S));
+    DFFRS_X1 _DFFSR_PPN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN(~S));
+    DFFRS_X1 _DFFSR_PPP_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN(~R), .SN(~S));
+Mapping DFF cells in module `\cpu':
+  mapped 3090 $_DFF_PN0_ cells to \DFFR_X1 cells.
+  mapped 3 $_DFF_PN1_ cells to \DFFS_X1 cells.
+
+11. Executing ABC pass (technology mapping using ABC).
+
+11.1. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Extracted 14268 gates and 19367 wires to a netlist network with 5099 inputs and 3069 outputs.
+
+11.1.1. Executing ABC.
+Running ABC command: <yosys-exe-dir>/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /root/stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.06 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "WELLTAP_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/root/stdcells.lib" has 90 cells (27 skipped: 13 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.10 sec
+ABC: Memory =    8.88 MB. Time =     0.10 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + read_constr -v /root/cpu.constr 
+ABC: Setting driving cell to be "BUF_X2".
+ABC: Setting output load to be 0.010000.
+ABC: + strash 
+ABC: + ifraig 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + retime -D 1000 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf -D 1000 
+ABC: + &put 
+ABC: + buffer 
+ABC: + upsize -D 1000 
+ABC: Current delay (512.24 ps) does not exceed the target delay (1000.00 ps). Upsizing is not performed.
+ABC: + dnsize -D 1000 
+ABC: + stime -p 
+ABC: WireLoad = "none"  Gates =   9240 ( 17.6 %)   Cap =  2.8 ff (  1.2 %)   Area =    12398.26 ( 90.6 %)   Delay =   526.03 ps  (  2.1 %)               
+ABC: Path  0 --       8 : 0    7 pi       A =   0.00  Df =  13.7   -4.5 ps  S =  15.1 ps  Cin =  0.0 ff  Cout =  10.6 ff  Cmax =   0.0 ff  G =    0  
+ABC: Path  1 --    8185 : 2    9 NAND2_X1 A =   0.80  Df =  52.9   -2.1 ps  S =  36.9 ps  Cin =  1.6 ff  Cout =  13.8 ff  Cmax =  59.4 ff  G =  827  
+ABC: Path  2 --    8188 : 3    6 AND3_X1  A =   1.33  Df = 121.9  -21.9 ps  S =  24.3 ps  Cin =  0.9 ff  Cout =   8.3 ff  Cmax =  60.4 ff  G =  891  
+ABC: Path  3 --    8191 : 3    3 AND3_X1  A =   1.33  Df = 175.4  -38.6 ps  S =  15.8 ps  Cin =  0.9 ff  Cout =   4.3 ff  Cmax =  60.4 ff  G =  453  
+ABC: Path  4 --    8192 : 3    5 NAND3_X1 A =   1.06  Df = 212.2  -40.8 ps  S =  25.3 ps  Cin =  1.6 ff  Cout =   7.7 ff  Cmax =  58.4 ff  G =  456  
+ABC: Path  5 --    8196 : 3    4 NOR3_X1  A =   1.06  Df = 290.4  -99.3 ps  S =  52.0 ps  Cin =  1.6 ff  Cout =   5.3 ff  Cmax =  16.0 ff  G =  318  
+ABC: Path  6 --    9206 : 2    9 AND2_X1  A =   1.06  Df = 349.6 -115.8 ps  S =  23.4 ps  Cin =  0.9 ff  Cout =   8.6 ff  Cmax =  60.6 ff  G =  906  
+ABC: Path  7 --    9207 : 1   10 BUF_X1   A =   0.80  Df = 405.7 -127.4 ps  S =  34.5 ps  Cin =  0.9 ff  Cout =  13.9 ff  Cmax =  60.7 ff  G = 1421  
+ABC: Path  8 --    9208 : 1   10 BUF_X1   A =   0.80  Df = 470.6 -142.5 ps  S =  40.8 ps  Cin =  0.9 ff  Cout =  16.6 ff  Cmax =  60.7 ff  G = 1711  
+ABC: Path  9 --    9230 : 2    1 NAND2_X1 A =   0.80  Df = 488.8 -139.5 ps  S =  10.5 ps  Cin =  1.6 ff  Cout =   1.6 ff  Cmax =  59.4 ff  G =   99  
+ABC: Path 10 --    9231 : 4    1 AOI22_X1 A =   1.33  Df = 526.0  -90.4 ps  S =  16.4 ps  Cin =  1.6 ff  Cout =   0.0 ff  Cmax =  24.6 ff  G =    0  
+ABC: Start-point = pi7 (\u_exe.cont_r).  End-point = po140 (\u_exe.o_addr_w [1]).
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.1.2. Re-integrating ABC results.
+ABC RESULTS:           AND2_X1 cells:      122
+ABC RESULTS:           AND3_X1 cells:       26
+ABC RESULTS:           AND4_X1 cells:        7
+ABC RESULTS:         AOI211_X1 cells:      128
+ABC RESULTS:          AOI21_X1 cells:      563
+ABC RESULTS:         AOI221_X1 cells:       49
+ABC RESULTS:          AOI22_X1 cells:      431
+ABC RESULTS:            BUF_X1 cells:      815
+ABC RESULTS:         CLKBUF_X1 cells:      321
+ABC RESULTS:            INV_X1 cells:      494
+ABC RESULTS:           MUX2_X1 cells:     2353
+ABC RESULTS:          NAND2_X1 cells:      518
+ABC RESULTS:          NAND3_X1 cells:      289
+ABC RESULTS:          NAND4_X1 cells:       50
+ABC RESULTS:           NOR2_X1 cells:      336
+ABC RESULTS:           NOR3_X1 cells:      143
+ABC RESULTS:           NOR4_X1 cells:      252
+ABC RESULTS:         OAI211_X1 cells:      162
+ABC RESULTS:          OAI21_X1 cells:      402
+ABC RESULTS:         OAI221_X1 cells:      117
+ABC RESULTS:         OAI222_X1 cells:      790
+ABC RESULTS:          OAI22_X1 cells:      601
+ABC RESULTS:          OAI33_X1 cells:        2
+ABC RESULTS:            OR2_X1 cells:       62
+ABC RESULTS:            OR3_X1 cells:        7
+ABC RESULTS:            OR4_X1 cells:       29
+ABC RESULTS:          XNOR2_X1 cells:      133
+ABC RESULTS:           XOR2_X1 cells:       38
+ABC RESULTS:        internal signals:    11199
+ABC RESULTS:           input signals:     5099
+ABC RESULTS:          output signals:     3069
+Removing temp directory.
+
+Warnings: 2 unique messages, 4 total
+End of script. Logfile hash: 4a6303b9a1
+CPU: user 12.38s system 0.04s, MEM: 78.23 MB total, 67.58 MB resident
+Yosys 0.9 (git sha1 UNKNOWN, clang 10.0.0-4ubuntu1 -fPIC -Os)
+Time spent: 21% 15x opt_merge (2 sec), 17% 18x opt_clean (2 sec), ...
