@@ -1,4 +1,4 @@
-# Make a Pipeline CPU
+# Make a Pipeline RISCV CPU
 Support insrtuction LD, SD, BEQ, BNE, ADDI, XORI, ORI, ANDI, SLLI, SRLI, ADD, SUB, XOR, OR, AND, STOP.
 
 ## Drafts
